@@ -5,7 +5,7 @@ export default function Footer(){
             <p>Napravio tata 👨‍💻 sa puno ❤️ za Minu.</p>
             <p>Sva prava zadržana.</p>
             <p className="flex items-center justify-center gap-1">
-                <AiOutlineCopyright />
+                <AiOutlineCopyright /> 2025
             </p>    
         </footer>
     )
