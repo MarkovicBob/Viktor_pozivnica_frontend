@@ -34,10 +34,33 @@ export default function Hero(){
     </motion.div>
     
     <div className="hero-grad"><div className="section py-20 sm:py-28 text-center text-white relative">
-      <motion.h1 initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.7}} className="text-4xl sm:text-6xl font-extrabold drop-shadow-lg">{event.title}</motion.h1>
-      <motion.p initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.9,delay:0.1}} className="mt-4 text-lg sm:text-xl opacity-95">Dođite da zajedno duvamo svećice, jedemo tortu i pravimo uspomene! 🎈</motion.p>
-      <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.9,delay:0.2}} className="mt-8 flex justify-center">
-        <a href="#rsvp" className="btn btn-primary"><FaBirthdayCake/> Potvrdi dolazak</a>
+      <motion.h1 
+        initial={{opacity:0,y:20}} 
+        animate={{opacity:1,y:0}} 
+        transition={{duration:0.7}} 
+        className="text-5xl sm:text-7xl font-bold drop-shadow-lg tracking-wide font-script"
+        style={{ 
+          textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+          lineHeight: '1.2'
+        }}
+      >
+        {event.title}
+      </motion.h1>
+      <motion.p 
+        initial={{opacity:0,y:20}} 
+        animate={{opacity:1,y:0}} 
+        transition={{duration:0.9,delay:0.1}} 
+        className="mt-6 text-lg sm:text-xl opacity-95 font-cute"
+      >
+        Dođite da zajedno duvamo svećice, jedemo tortu i pravimo uspomene! 🎈
+      </motion.p>
+      <motion.div 
+        initial={{opacity:0,y:20}} 
+        animate={{opacity:1,y:0}} 
+        transition={{duration:0.9,delay:0.2}} 
+        className="mt-8 flex justify-center"
+      >
+        <a href="#rsvp" className="btn btn-primary text-lg"><FaBirthdayCake/> Potvrdi dolazak</a>
       </motion.div>
       </div>
     </div>
