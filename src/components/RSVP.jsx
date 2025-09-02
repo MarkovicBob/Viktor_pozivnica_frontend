@@ -94,7 +94,7 @@ export default function RSVP(){
         transition={{ duration: 0.8 }}
       >
         <div className="relative z-10">
-          <h2 className="text-2xl font-bold text-pink-700 animate-bounce">RSVP</h2>
+          <h2 className="text-3xl font-bold text-pink-700 animate-bounce font-elegant">RSVP</h2>
           <p className="opacity-80 mt-1">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
     <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-4 mt-4">
       <div className="sm:col-span-2">

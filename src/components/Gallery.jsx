@@ -28,7 +28,7 @@ export default function Gallery() {
     <section className="section">
       <div className="card">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-2xl font-bold text-pink-700">Mina kroz godinu 📸</h2>
+          <h2 className="text-3xl font-bold text-pink-700 font-elegant">Mina kroz godinu 📸</h2>
           <div className="flex gap-2">
             <button className="btn btn-outline" onClick={prev}>◀</button>
             <button className="btn btn-outline" onClick={next}>▶</button>

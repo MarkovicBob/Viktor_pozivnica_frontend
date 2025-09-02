@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family: 'Fredoka', system-ui, sans-serif;
+    letter-spacing: 0.01em;
+  }
+  
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  
+  h2, h3, h4, h5, h6 {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  
+  p {
+    font-family: 'Mali', system-ui, sans-serif;
+  }
+  
+  button, a.btn {
+    font-family: 'Fredoka', sans-serif;
+    letter-spacing: 0.01em;
+  }
+}
+
 @layer components {
   .card { @apply bg-white/80 backdrop-blur rounded-2xl shadow-xl p-6; }
   .btn { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium shadow-md transition hover:-translate-y-0.5; }
