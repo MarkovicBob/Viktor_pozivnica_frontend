@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card { @apply bg-white/80 backdrop-blur rounded-2xl shadow-xl p-6; }
+  .btn { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium shadow-md transition hover:-translate-y-0.5; }
+  .btn-primary { @apply bg-pink-500 text-white hover:bg-pink-600; }
+  .btn-outline { @apply bg-white text-pink-600 border border-pink-200 hover:bg-pink-50; }
+  .section { @apply max-w-5xl mx-auto px-4 sm:px-6; }
+}
+
+.hero-grad { background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%); }
+
+@keyframes wave {
+  0% { transform: translateX(-2px) rotate(-5deg); }
+  50% { transform: translateX(2px) rotate(5deg); }
+  100% { transform: translateX(-2px) rotate(-5deg); }
+}
+
+.animate-wave {
+  animation: wave 2s ease-in-out infinite;
+}
+
+/* Balloon hover effects */
+.balloon-hover {
+  transition: all 0.3s ease;
+}
+
+.balloon-hover:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Custom animations for teddy bear */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bubble animations */
+@keyframes bubble-pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.bubble-pulse {
+  animation: bubble-pulse 2s ease-in-out infinite;
+}
+
+@keyframes bubble-shine {
+  0% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+  100% { opacity: 0.4; transform: scale(1); }
+}
+
+.bubble-shine {
+  animation: bubble-shine 3s ease-in-out infinite;
+}
+
+@keyframes rainbow-shift {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+.rainbow-shift {
+  animation: rainbow-shift 5s ease-in-out infinite;
+}
+
+.hero-grad { background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%); }
+
+@keyframes wave {
+  0% { transform: translateX(-2px) rotate(-5deg); }
+  50% { transform: translateX(2px) rotate(5deg); }
+  100% { transform: translateX(-2px) rotate(-5deg); }
+}
+
+.animate-wave {
+  animation: wave 2s ease-in-out infinite;
+}
+
+/* Balloon hover effects */
+.balloon-hover {
+  transition: all 0.3s ease;
+}
+
+.balloon-hover:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Custom animations for teddy bear */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bubble animations */
+@keyframes bubble-pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.bubble-pulse {
+  animation: bubble-pulse 2s ease-in-out infinite;
+}
+
+@keyframes bubble-shine {
+  0% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+  100% { opacity: 0.4; transform: scale(1); }
+}
+
+.bubble-shine {
+  animation: bubble-shine 3s ease-in-out infinite;
+}
+
+@keyframes rainbow-shift {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+.rainbow-shift {
+  animation: rainbow-shift 5s ease-in-out infinite;
+}
+
+/* Bubble animations */
+@keyframes bubble-pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.bubble-pulse {
+  animation: bubble-pulse 2s ease-in-out infinite;
+}
+
+@keyframes bubble-shine {
+  0% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+  100% { opacity: 0.4; transform: scale(1); }
+}
+
+.bubble-shine {
+  animation: bubble-shine 3s ease-in-out infinite;
+}
+
+@keyframes rainbow-shift {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+.rainbow-shift {
+  animation: rainbow-shift 5s ease-in-out infinite;
+}
+
+.hero-grad { background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%); }
+
+@keyframes wave {
+  0% { transform: translateX(-2px) rotate(-5deg); }
+  50% { transform: translateX(2px) rotate(5deg); }
+  100% { transform: translateX(-2px) rotate(-5deg); }
+}
+
+.animate-wave {
+  animation: wave 2s ease-in-out infinite;
+}
+
+/* Balloon hover effects */
+.balloon-hover {
+  transition: all 0.3s ease;
+}
+
+.balloon-hover:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Custom animations for teddy bear */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bubble animations */
+@keyframes bubble-pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.bubble-pulse {
+  animation: bubble-pulse 2s ease-in-out infinite;
+}
+
+@keyframes bubble-shine {
+  0% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+  100% { opacity: 0.4; transform: scale(1); }
+}
+
+.bubble-shine {
+  animation: bubble-shine 3s ease-in-out infinite;
+}
+
+@keyframes rainbow-shift {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+.rainbow-shift {
+  animation: rainbow-shift 5s ease-in-out infinite;
+}
