@@ -145,10 +145,10 @@ export default function RsvpWidget({ bounce }) {
   }
 
   return (
-  <section id="rsvp-widget" aria-label="RSVP" className={`section pt-0${bounce ? ' bounce-anim' : ''}`}>
-    <div className="w-full max-w-2xl mx-auto mt-8 p-8 border-2 border-pink-100 rounded-3xl shadow-lg bg-white/80 backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
-      <h3 className="text-2xl font-bold mb-3 text-gray-800">Potvrda dolaska</h3>
-      <p className="text-gray-600 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
+  <section id="rsvp-widget" aria-label="RSVP" className={`section pt-0${bounce ? ' bounce-anim' : ''}`}> 
+    <div className="card relative">
+      <h3 className="text-3xl font-bold text-pink-700 font-elegant mb-3">Potvrda dolaska</h3>
+      <p className="text-lg text-gray-700 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
 
       {!picked && (
         <div>
@@ -157,7 +157,8 @@ export default function RsvpWidget({ bounce }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Ukucaj prezime ili ime…"
-            className="w-full border-2 border-pink-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200"
+            className="w-full border-2 border-pink-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200 font-fredoka"
+            style={{ fontFamily: 'Fredoka, system-ui, sans-serif' }}
           />
           {loading && <div className="text-sm mt-2 opacity-70">Tražim…</div>}
           {suggest.length > 0 && (
@@ -166,10 +167,10 @@ export default function RsvpWidget({ bounce }) {
                 <li key={it.invitationCode}>
                   <button
                     onClick={() => pick(it)}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-50"
+                    className="w-full text-left px-4 py-2 hover:bg-gray-50 font-fredoka"
                   >
-                    <div className="font-medium">{it.familyName}</div>
-                    <div className="text-sm opacity-70">
+                    <div className="font-medium font-fredoka">{it.familyName}</div>
+                    <div className="text-sm opacity-70 font-fredoka">
                       {(it.members || []).map(m => m.name).join(", ")}
                     </div>
                   </button>
