@@ -7,8 +7,10 @@ import { Toaster } from 'react-hot-toast'
 import TeddyImage from './components/TeddyImage.jsx'
 import CursorConfetti from './components/CursorConfetti.jsx'
 import FloatingBubbles from './components/FloatingBubbles.jsx'
-import RSVP from './components/RSVP.jsx'
+// import RSVP from './components/RSVP.jsx'
+import RsvpWidget from './components/RsvpWidget.jsx'
 import './styles.css'
+
 export default function App(){
   return (
     <div className="min-h-screen">
@@ -19,7 +21,8 @@ export default function App(){
       <main className="space-y-12">
         <Details/>
         <Gallery/>
-        <RSVP/>
+        {/* <RSVP/> */}
+        <RsvpWidget />
       </main>
       <TeddyImage />
       <Footer/>
