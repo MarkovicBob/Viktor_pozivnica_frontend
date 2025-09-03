@@ -1,5 +1,5 @@
-
-const BASE = (import.meta.env.DEV ? "" : (import.meta.env.VITE_API_URL || "")).replace(/\/$/, "");
+const PROD_FALLBACK = "https://mina-pozivnica-server.onrender.com";
+const BASE = (import.meta.env.DEV ? "" : (import.meta.env.VITE_API_URL || PROD_FALLBACK)).replace(/\/$/, "");
 
 async function req(path, init = {}) {
   const isJsonBody = init.body && typeof init.body === "object" && !(init.body instanceof FormData);
