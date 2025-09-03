@@ -23,18 +23,29 @@ export default function App(){
     setTimeout(() => setShowSadPopup(false), 2000);
   };
 
+  const rsvpRef = React.useRef(null);
+  const [bounce, setBounce] = useState(false);
+  const scrollToRsvp = () => {
+    if (rsvpRef.current) {
+      rsvpRef.current.scrollIntoView({ behavior: "smooth" });
+      setBounce(true);
+      setTimeout(() => setBounce(false), 700);
+    }
+  };
   return (
     <PopupContext.Provider value={{ showSad }}>
       <div className="min-h-screen">
         <Toaster />
         <CursorConfetti />
         <FloatingBubbles />
-        <Hero/>
+        <Hero scrollToRsvp={scrollToRsvp}/>
         <main className="space-y-12">
           <Details/>
           <Gallery/>
           {/* <RSVP/> */}
-          <RsvpWidget />
+          <div ref={rsvpRef}>
+            <RsvpWidget bounce={bounce} />
+          </div>
         </main>
         <TeddyImage />
         <Footer/>

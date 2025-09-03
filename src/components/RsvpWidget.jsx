@@ -12,7 +12,17 @@ function useDebounced(value, delay = 250) {
   return v;
 }
 
-export default function RsvpWidget() {
+export default function RsvpWidget({ bounce }) {
+  // Bounce animacija
+  useEffect(() => {
+    if (bounce) {
+      const el = document.getElementById('rsvp-widget');
+      if (el) {
+        el.classList.add('bounce-anim');
+        setTimeout(() => el.classList.remove('bounce-anim'), 700);
+      }
+    }
+  }, [bounce]);
   const [query, setQuery] = useState("");
   const [suggest, setSuggest] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -135,10 +145,10 @@ export default function RsvpWidget() {
   }
 
   return (
-    <section aria-label="RSVP" className="section pt-0">
+  <section id="rsvp-widget" aria-label="RSVP" className={`section pt-0${bounce ? ' bounce-anim' : ''}`}>
     <div className="w-full max-w-2xl mx-auto mt-8 p-8 border-2 border-pink-100 rounded-3xl shadow-lg bg-white/80 backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
       <h3 className="text-2xl font-bold mb-3 text-gray-800">Potvrda dolaska</h3>
-      <p className="text-gray-600 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali za našu malu princezu. 💖</p>
+      <p className="text-gray-600 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
 
       {!picked && (
         <div>
@@ -243,7 +253,7 @@ export default function RsvpWidget() {
                           +
                         </button>
                       </div>
-                      <span className="text-gray-500 mt-1 sm:mt-0">odraslih (18+ godina)</span>
+                      {/* <span className="text-gray-500 mt-1 sm:mt-0">odraslih (18+ godina)</span> */}
                     </div>
                   </div>
                   
