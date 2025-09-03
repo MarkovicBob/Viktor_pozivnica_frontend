@@ -13,6 +13,7 @@ function useDebounced(value, delay = 250) {
 }
 
 export default function RsvpWidget({ bounce }) {
+  const [showConfirm, setShowConfirm] = useState(false);
   // Bounce animacija
   useEffect(() => {
     if (bounce) {
@@ -303,12 +304,24 @@ export default function RsvpWidget({ bounce }) {
 
                 <button
                   disabled={loading}
-                  onClick={onSubmit}
+                  onClick={() => setShowConfirm(true)}
                   className="w-full py-4 px-8 rounded-xl text-xl font-medium bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg 
                     hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
                 >
                   {loading ? "Šaljem..." : "Potvrdi odgovor"}
                 </button>
+
+                {showConfirm && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+                    <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
+                      <div className="text-xl font-bold mb-4 text-pink-700">Da li ste sigurni da želite da pošaljete vaš odgovor?</div>
+                      <div className="flex gap-4 justify-center mt-6">
+                        <button className="btn btn-outline" onClick={() => setShowConfirm(false)}>Odustani</button>
+                        <button className="btn btn-primary" onClick={onSubmit}>Pošalji</button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           )}
