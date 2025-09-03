@@ -90,11 +90,11 @@ export default function RsvpWidget() {
       // Računamo broj odraslih i dece na osnovu broja članova
       const totalMembers = (data.members || []).length;
       if (totalMembers <= 2) {
-        // Za 1-2 člana: svi su odrasli
+        
         setAdultCount(totalMembers);
         setChildCount(0);
       } else {
-        // Za 3+ članova: prva dva su odrasli, ostali su deca
+        
         setAdultCount(2);
         setChildCount(totalMembers - 2);
       }
@@ -135,7 +135,7 @@ export default function RsvpWidget() {
   }
 
   return (
-    
+    <section aria-label="RSVP" className="section pt-0">
     <div className="w-full max-w-2xl mx-auto mt-8 p-8 border-2 border-pink-100 rounded-3xl shadow-lg bg-white/80 backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
       <h3 className="text-2xl font-bold mb-3 text-gray-800">Potvrda dolaska</h3>
       <p className="text-gray-600 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali za našu malu princezu. 💖</p>
@@ -312,5 +312,6 @@ export default function RsvpWidget() {
       
 
     </div>
+    </section>
   );
 }
