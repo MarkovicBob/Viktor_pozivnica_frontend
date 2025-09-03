@@ -11,7 +11,7 @@ import SadPopup from './components/SadPopup.jsx';
 import RsvpWidget from './components/RsvpWidget.jsx';
 import './styles.css';
 
-// Kreiramo context za popup
+
 const PopupContext = createContext();
 export const usePopup = () => useContext(PopupContext);
 
