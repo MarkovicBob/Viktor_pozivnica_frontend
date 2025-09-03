@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { searchInvites, getInviteByCode, submitRsvp } from "../api/rsvp";
+import confetti from 'canvas-confetti';
 
 function useDebounced(value, delay = 250) {
   const [v, setV] = useState(value);
@@ -17,9 +18,11 @@ export default function RsvpWidget() {
   const [picked, setPicked] = useState(null); // { invitationCode, ... }
   const [invite, setInvite] = useState(null); // detalji iz /by-code
   const [status, setStatus] = useState("accepted");
-  const [count, setCount] = useState(0);
+  const [adultCount, setAdultCount] = useState(0);
+  const [childCount, setChildCount] = useState(0);
   const [message, setMessage] = useState("");
   const [notice, setNotice] = useState("");
+  const [showSadEmoji, setShowSadEmoji] = useState(false);
 
   // ako postoji code u URL-u (?code=XYZ), automatski učitaj
   const codeFromUrl = useMemo(() => {
@@ -55,7 +58,8 @@ export default function RsvpWidget() {
         setPicked({ invitationCode: codeFromUrl, familyName: data.familyName, members: data.members });
         setInvite(data);
         setStatus("accepted");
-        setCount(data.seats ?? 0);
+        setAdultCount(Math.ceil((data.seats ?? 0) / 2));
+        setChildCount(Math.floor((data.seats ?? 0) / 2));
       } catch (e) {
         setNotice("Kod nije pronađen.");
       } finally { setLoading(false); }
@@ -73,7 +77,8 @@ export default function RsvpWidget() {
       const data = await getInviteByCode(item.invitationCode);
       setInvite(data);
       setStatus("accepted");
-      setCount(data.seats ?? 0);
+      setAdultCount(Math.ceil((data.seats ?? 0) / 2));
+      setChildCount(Math.floor((data.seats ?? 0) / 2));
     } catch (e) {
       setNotice(e.message || "Greška");
     } finally {
@@ -88,10 +93,21 @@ export default function RsvpWidget() {
       await submitRsvp({
         code: picked.invitationCode,
         status,
-        attendeesCount: status === "accepted" ? count : 0,
+        attendeesCount: status === "accepted" ? adultCount + childCount : 0,
+        adultCount: status === "accepted" ? adultCount : 0,
+        childCount: status === "accepted" ? childCount : 0,
         message,
       });
-      setNotice("Hvala! Vaš odgovor je zabeležen. ❤️");
+      if (status === "accepted") {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+      setNotice(status === "accepted" 
+        ? "Hvala na potvrdi! Jedva čekamo da se vidimo! 🎉❤️" 
+        : "Hvala na odgovoru! Žao nam je što ne možete doći. 💝");
     } catch (e) {
       setNotice(e.message || "Greška");
     } finally {
@@ -101,9 +117,9 @@ export default function RsvpWidget() {
 
   return (
     
-    <div className="w-full max-w-xl mx-auto mt-6 p-4 border rounded-2xl shadow-sm">
-      <p className="opacity-80 mt-1">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
-      <h3 className="text-lg font-semibold mb-2">Potvrda dolaska </h3>
+    <div className="w-full max-w-2xl mx-auto mt-8 p-8 border-2 border-pink-100 rounded-3xl shadow-lg bg-white/80 backdrop-blur-sm transition-all duration-300 hover:shadow-xl">
+      <h3 className="text-2xl font-bold mb-3 text-gray-800">Potvrda dolaska</h3>
+      <p className="text-gray-600 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali za našu malu princezu. 💖</p>
 
       {!picked && (
         <div>
@@ -112,7 +128,7 @@ export default function RsvpWidget() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Ukucaj prezime ili ime…"
-            className="w-full border rounded-xl px-4 py-3"
+            className="w-full border-2 border-pink-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200"
           />
           {loading && <div className="text-sm mt-2 opacity-70">Tražim…</div>}
           {suggest.length > 0 && (
@@ -160,59 +176,125 @@ export default function RsvpWidget() {
             </div>
           ) : (
             <>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    checked={status === "accepted"}
-                    onChange={() => setStatus("accepted")}
-                  />
-                  Dolazimo
-                </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    checked={status === "declined"}
-                    onChange={() => setStatus("declined")}
-                  />
-                  Nažalost ne možemo
-                </label>
+              <div className="flex gap-4 mb-6">
+                <button
+                  onClick={() => setStatus("accepted")}
+                  className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
+                    status === "accepted"
+                      ? "bg-pink-500 text-white shadow-lg scale-105"
+                      : "bg-pink-100 text-pink-700 hover:bg-pink-200"
+                  }`}
+                >
+                  🎉 Dolazimo!
+                </button>
+                <button
+                  onClick={() => {
+                    setStatus("declined");
+                    setShowSadEmoji(true);
+                    setTimeout(() => setShowSadEmoji(false), 2000);
+                  }}
+                  className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
+                    status === "declined"
+                      ? "bg-gray-500 text-white shadow-lg scale-105"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  😢 Nažalost ne možemo
+                </button>
               </div>
 
               {status === "accepted" && (
-                <div>
-                  <label className="block text-sm mb-1">Broj dolazaka</label>
-                  <input
-                    type="number"
-                    min={0}
-                    max={10}
-                    value={count}
-                    onChange={(e) => setCount(+e.target.value || 0)}
-                    className="border rounded px-3 py-2 w-32"
-                  />
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm mb-1">Broj odraslih</label>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setAdultCount(Math.max(0, adultCount - 1))}
+                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                        >
+                          -
+                        </button>
+                        <div className="w-20 text-center text-xl font-semibold">
+                          {adultCount}
+                        </div>
+                        <button
+                          onClick={() => setAdultCount(Math.min(10, adultCount + 1))}
+                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <span className="text-gray-500 mt-1 sm:mt-0">odraslih (18+ godina)</span>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm mb-1">Broj dece</label>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setChildCount(Math.max(0, childCount - 1))}
+                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                        >
+                          -
+                        </button>
+                        <div className="w-20 text-center text-xl font-semibold">
+                          {childCount}
+                        </div>
+                        <button
+                          onClick={() => setChildCount(Math.min(10, childCount + 1))}
+                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <span className="text-gray-500 mt-1 sm:mt-0">dece (2-12 godina)</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 p-3 bg-pink-50/50 rounded-xl text-center">
+                    <div className="text-lg font-medium text-gray-700">
+                      Ukupno dolazi: <span className="text-pink-600 font-bold">{adultCount + childCount}</span> {(adultCount + childCount) === 1 ? 'osoba' : 'osobe'}
+                    </div>
+                  </div>
                 </div>
               )}
 
-              <textarea
-                placeholder="Poruka (opciono)…"
-                className="w-full border rounded p-3"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-gray-600 mb-2">Poruka za nas (opciono)</label>
+                  <textarea
+                    placeholder="Napišite nam poruku..."
+                    className="w-full border-2 border-pink-100 rounded-xl px-4 py-3 h-32 focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                </div>
 
-              <button
-                disabled={loading}
-                onClick={onSubmit}
-                className="px-4 py-2 rounded-xl bg-black text-white disabled:opacity-60"
-              >
-                Potvrdi
-              </button>
+                <button
+                  disabled={loading}
+                  onClick={onSubmit}
+                  className="w-full py-4 px-8 rounded-xl text-xl font-medium bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg 
+                    hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
+                >
+                  {loading ? "Šaljem..." : "Potvrdi odgovor"}
+                </button>
+              </div>
             </>
           )}
         </div>
       )}
 
-      {notice && <div className="mt-3 text-sm">{notice}</div>}
+      {(notice || showSadEmoji) && (
+        <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 text-gray-800 animate-fade-in">
+          {notice || (showSadEmoji && (
+            <div className="text-6xl animate-bounce">
+              😢
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
