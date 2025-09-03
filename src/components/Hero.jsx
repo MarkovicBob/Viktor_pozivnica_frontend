@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { FaBirthdayCake } from 'react-icons/fa'
 import FloatingBubbles from './FloatingBubbles.jsx'
 import { event } from '../config.js'
-export default function Hero(){
+export default function Hero({ scrollToRsvp }){
   return(<section className="relative overflow-hidden">
     {/* Teddy bear in top left corner */}
     <motion.div 
@@ -52,7 +52,7 @@ export default function Hero(){
         transition={{duration:0.9,delay:0.1}} 
         className="mt-6 text-lg sm:text-xl opacity-95 font-cute"
       >
-        Dođite da zajedno duvamo svećice, jedemo tortu i pravimo uspomene! 🎈
+        Dođite da zajedno duvamo svećicu, jedemo tortu i pravimo uspomene! 🎈
       </motion.p>
       <motion.div 
         initial={{opacity:0,y:20}} 
@@ -60,7 +60,7 @@ export default function Hero(){
         transition={{duration:0.9,delay:0.2}} 
         className="mt-8 flex justify-center"
       >
-        <a href="#rsvp" className="btn btn-primary text-lg"><FaBirthdayCake/> Potvrdi dolazak</a>
+  <button type="button" className="btn btn-primary text-lg" onClick={scrollToRsvp}><FaBirthdayCake/> Potvrdi dolazak</button>
       </motion.div>
       </div>
     </div>
