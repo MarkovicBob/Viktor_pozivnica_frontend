@@ -1,49 +1,75 @@
+/*
+! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
+*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html {
-    font-family: 'Fredoka', system-ui, sans-serif;
+    font-family: "Fredoka", system-ui, sans-serif;
     letter-spacing: 0.01em;
   }
-  
+
   h1 {
-    font-family: 'Dancing Script', cursive;
+    font-family: "Dancing Script", cursive;
     font-weight: 700;
     letter-spacing: 0.01em;
   }
-  
-  h2, h3, h4, h5, h6 {
-    font-family: 'Great Vibes', cursive;
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Great Vibes", cursive;
     font-weight: 400;
     letter-spacing: 0.02em;
   }
-  
+
   p {
-    font-family: 'Mali', system-ui, sans-serif;
+    font-family: "Mali", system-ui, sans-serif;
   }
-  
-  button, a.btn {
-    font-family: 'Fredoka', sans-serif;
+
+  button,
+  a.btn {
+    font-family: "Fredoka", sans-serif;
     letter-spacing: 0.01em;
   }
 }
 
 @layer components {
-  .card { @apply bg-white/80 backdrop-blur rounded-2xl shadow-xl p-6; }
-  .btn { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium shadow-md transition hover:-translate-y-0.5; }
-  .btn-primary { @apply bg-pink-500 text-white hover:bg-pink-600; }
-  .btn-outline { @apply bg-white text-pink-600 border border-pink-200 hover:bg-pink-50; }
-  .section { @apply max-w-5xl mx-auto px-4 sm:px-6; }
+  .card {
+    @apply bg-white/80 backdrop-blur rounded-2xl shadow-xl p-6;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium shadow-md transition hover:-translate-y-0.5;
+  }
+  .btn-primary {
+    @apply bg-pink-500 text-white hover:bg-pink-600;
+  }
+  .btn-outline {
+    @apply bg-white text-pink-600 border border-pink-200 hover:bg-pink-50;
+  }
+  .section {
+    @apply max-w-5xl mx-auto px-4 sm:px-6;
+  }
 }
 
-.hero-grad { background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%); }
+.hero-grad {
+  background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%);
+}
 
 @keyframes wave {
-  0% { transform: translateX(-2px) rotate(-5deg); }
-  50% { transform: translateX(2px) rotate(5deg); }
-  100% { transform: translateX(-2px) rotate(-5deg); }
+  0% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
 }
 
 .animate-wave {
@@ -62,9 +88,15 @@
 
 /* Custom animations for teddy bear */
 @keyframes float {
-  0% { transform: translateY(0px) rotate(-2deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-  100% { transform: translateY(0px) rotate(-2deg); }
+  0% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
 }
 
 .float-animation {
@@ -73,9 +105,18 @@
 
 /* Bubble animations */
 @keyframes bubble-pulse {
-  0% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.9; }
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
 }
 
 .bubble-pulse {
@@ -83,9 +124,18 @@
 }
 
 @keyframes bubble-shine {
-  0% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.1); }
-  100% { opacity: 0.4; transform: scale(1); }
+  0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
 }
 
 .bubble-shine {
@@ -93,21 +143,35 @@
 }
 
 @keyframes rainbow-shift {
-  0% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(30deg); }
-  100% { filter: hue-rotate(0deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
 }
 
 .rainbow-shift {
   animation: rainbow-shift 5s ease-in-out infinite;
 }
 
-.hero-grad { background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%); }
+.hero-grad {
+  background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%);
+}
 
 @keyframes wave {
-  0% { transform: translateX(-2px) rotate(-5deg); }
-  50% { transform: translateX(2px) rotate(5deg); }
-  100% { transform: translateX(-2px) rotate(-5deg); }
+  0% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
 }
 
 .animate-wave {
@@ -126,9 +190,15 @@
 
 /* Custom animations for teddy bear */
 @keyframes float {
-  0% { transform: translateY(0px) rotate(-2deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-  100% { transform: translateY(0px) rotate(-2deg); }
+  0% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
 }
 
 .float-animation {
@@ -137,9 +207,18 @@
 
 /* Bubble animations */
 @keyframes bubble-pulse {
-  0% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.9; }
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
 }
 
 .bubble-pulse {
@@ -147,9 +226,18 @@
 }
 
 @keyframes bubble-shine {
-  0% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.1); }
-  100% { opacity: 0.4; transform: scale(1); }
+  0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
 }
 
 .bubble-shine {
@@ -157,9 +245,15 @@
 }
 
 @keyframes rainbow-shift {
-  0% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(30deg); }
-  100% { filter: hue-rotate(0deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
 }
 
 .rainbow-shift {
@@ -168,9 +262,18 @@
 
 /* Bubble animations */
 @keyframes bubble-pulse {
-  0% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.9; }
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
 }
 
 .bubble-pulse {
@@ -178,9 +281,18 @@
 }
 
 @keyframes bubble-shine {
-  0% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.1); }
-  100% { opacity: 0.4; transform: scale(1); }
+  0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
 }
 
 .bubble-shine {
@@ -188,21 +300,35 @@
 }
 
 @keyframes rainbow-shift {
-  0% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(30deg); }
-  100% { filter: hue-rotate(0deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
 }
 
 .rainbow-shift {
   animation: rainbow-shift 5s ease-in-out infinite;
 }
 
-.hero-grad { background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%); }
+.hero-grad {
+  background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%);
+}
 
 @keyframes wave {
-  0% { transform: translateX(-2px) rotate(-5deg); }
-  50% { transform: translateX(2px) rotate(5deg); }
-  100% { transform: translateX(-2px) rotate(-5deg); }
+  0% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
 }
 
 .animate-wave {
@@ -221,9 +347,15 @@
 
 /* Custom animations for teddy bear */
 @keyframes float {
-  0% { transform: translateY(0px) rotate(-2deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-  100% { transform: translateY(0px) rotate(-2deg); }
+  0% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
 }
 
 .float-animation {
@@ -232,9 +364,18 @@
 
 /* Bubble animations */
 @keyframes bubble-pulse {
-  0% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.9; }
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
 }
 
 .bubble-pulse {
@@ -242,9 +383,18 @@
 }
 
 @keyframes bubble-shine {
-  0% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.1); }
-  100% { opacity: 0.4; transform: scale(1); }
+  0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
 }
 
 .bubble-shine {
@@ -252,9 +402,15 @@
 }
 
 @keyframes rainbow-shift {
-  0% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(30deg); }
-  100% { filter: hue-rotate(0deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
 }
 
 .rainbow-shift {
