@@ -14,6 +14,7 @@ function useDebounced(value, delay = 250) {
 
 export default function RsvpWidget({ bounce }) {
   const [showConfirm, setShowConfirm] = useState(false);
+  const [sent, setSent] = useState(false);
   // Bounce animacija
   useEffect(() => {
     if (bounce) {
@@ -118,6 +119,7 @@ export default function RsvpWidget({ bounce }) {
 
   async function onSubmit() {
     if (!picked?.invitationCode) return;
+    setShowConfirm(false);
     try {
       setLoading(true);
       await submitRsvp({
@@ -128,16 +130,12 @@ export default function RsvpWidget({ bounce }) {
         childCount: status === "accepted" ? childCount : 0,
         message,
       });
+      setSent(true);
       if (status === "accepted") {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
+        setNotice("Hvala na potvrdi! Jedva čekamo da se vidimo! 🎉❤️");
+      } else {
+        setNotice("Hvala na odgovoru! Žao nam je što ne možete doći. 💝");
       }
-      setNotice(status === "accepted" 
-        ? "Hvala na potvrdi! Jedva čekamo da se vidimo! 🎉❤️" 
-        : "Hvala na odgovoru! Žao nam je što ne možete doći. 💝");
     } catch (e) {
       setNotice(e.message || "Greška");
     } finally {
@@ -146,196 +144,203 @@ export default function RsvpWidget({ bounce }) {
   }
 
   return (
-  <section id="rsvp-widget" aria-label="RSVP" className={`section pt-0${bounce ? ' bounce-anim' : ''}`}> 
-    <div className="card relative">
-      <h3 className="text-3xl font-bold text-pink-700 font-elegant mb-3">Potvrda dolaska</h3>
-      <p className="text-lg text-gray-700 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
+    <section id="rsvp-widget" aria-label="RSVP" className={`section pt-0${bounce ? ' bounce-anim' : ''}`}> 
+      {!sent ? (
+        <div className="card relative">
+          <h3 className="text-3xl font-bold text-pink-700 font-elegant mb-3">Potvrda dolaska</h3>
+          <p className="text-lg text-gray-700 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
 
-      {!picked && (
-        <div>
-          <label className="block text-sm mb-1">Pronađi svoju porodicu</label>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Ukucaj prezime ili ime…"
-            className="w-full border-2 border-pink-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200 font-fredoka"
-            style={{ fontFamily: 'Fredoka, system-ui, sans-serif' }}
-          />
-          {loading && <div className="text-sm mt-2 opacity-70">Tražim…</div>}
-          {suggest.length > 0 && (
-            <ul className="mt-2 border rounded-xl divide-y overflow-hidden">
-              {suggest.map((it) => (
-                <li key={it.invitationCode}>
-                  <button
-                    onClick={() => pick(it)}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-50 font-fredoka"
-                  >
-                    <div className="font-medium font-fredoka">{it.familyName}</div>
-                    <div className="text-sm opacity-70 font-fredoka">
-                      {(it.members || []).map(m => m.name).join(", ")}
-                    </div>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
-
-      {picked && (
-        <div className="mt-3 space-y-3">
-          <div className="flex items-center justify-between gap-3">
+          {!picked && (
             <div>
-              <div className="font-medium">{picked.familyName}</div>
-              <div className="text-sm opacity-70">
-                {(picked.members || []).map(m => m.name).join(", ")}
-              </div>
-            </div>
-            <button
-              onClick={() => { setPicked(null); setInvite(null); setNotice(""); }}
-              className="text-sm underline"
-            >
-              Promeni
-            </button>
-          </div>
-
-          {!invite ? (
-            <div className="text-sm opacity-70">Učitavam detalje…</div>
-          ) : invite.status !== "pending" ? (
-            <div className="p-3 border rounded bg-gray-50">
-              Ovaj poziv je već odgovoren ({invite.status}).
-            </div>
-          ) : (
-            <>
-              <div className="flex gap-4 mb-6">
-                <button
-                  onClick={() => setStatus("accepted")}
-                  className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
-                    status === "accepted"
-                      ? "bg-pink-500 text-white shadow-lg scale-105"
-                      : "bg-pink-100 text-pink-700 hover:bg-pink-200"
-                  }`}
-                >
-                  🎉 Dolazimo!
-                </button>
-                <button
-                  onClick={() => {
-                    setStatus("declined");
-                    showSad();
-                  }}
-                  className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
-                    status === "declined"
-                      ? "bg-gray-500 text-white shadow-lg scale-105"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  😢 Nažalost ne možemo
-                </button>
-              </div>
-
-              {status === "accepted" && (
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm mb-1">Broj odraslih</label>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setAdultCount(Math.max(0, adultCount - 1))}
-                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
-                        >
-                          -
-                        </button>
-                        <div className="w-20 text-center text-xl font-semibold">
-                          {adultCount}
+              <label className="block text-sm mb-1">Pronađi svoju porodicu</label>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Ukucaj prezime ili ime…"
+                className="w-full border-2 border-pink-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200 font-fredoka"
+                style={{ fontFamily: 'Fredoka, system-ui, sans-serif' }}
+              />
+              {loading && <div className="text-sm mt-2 opacity-70">Tražim…</div>}
+              {suggest.length > 0 && (
+                <ul className="mt-2 border rounded-xl divide-y overflow-hidden">
+                  {suggest.map((it) => (
+                    <li key={it.invitationCode}>
+                      <button
+                        onClick={() => pick(it)}
+                        className="w-full text-left px-4 py-2 hover:bg-gray-50 font-fredoka"
+                      >
+                        <div className="font-medium font-fredoka">{it.familyName}</div>
+                        <div className="text-sm opacity-70 font-fredoka">
+                          {(it.members || []).map(m => m.name).join(", ")}
                         </div>
-                        <button
-                          onClick={() => setAdultCount(Math.min(10, adultCount + 1))}
-                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
-                        >
-                          +
-                        </button>
-                      </div>
-                      {/* <span className="text-gray-500 mt-1 sm:mt-0">odraslih (18+ godina)</span> */}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm mb-1">Broj dece</label>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setChildCount(Math.max(0, childCount - 1))}
-                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
-                        >
-                          -
-                        </button>
-                        <div className="w-20 text-center text-xl font-semibold">
-                          {childCount}
-                        </div>
-                        <button
-                          onClick={() => setChildCount(Math.min(10, childCount + 1))}
-                          className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
-                        >
-                          +
-                        </button>
-                      </div>
-                      <span className="text-gray-500 mt-1 sm:mt-0">dece (2-12 godina)</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 p-3 bg-pink-50/50 rounded-xl text-center">
-                    <div className="text-lg font-medium text-gray-700">
-                      Ukupno dolazi: <span className="text-pink-600 font-bold">{adultCount + childCount}</span> {(adultCount + childCount) === 1 ? 'osoba' : 'osobe'}
-                    </div>
-                  </div>
-                </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               )}
+            </div>
+          )}
 
-              <div className="space-y-6">
+          {picked && (
+            <div className="mt-3 space-y-3">
+              <div className="flex items-center justify-between gap-3">
                 <div>
-                  <label className="block text-gray-600 mb-2">Poruka za nas (opciono)</label>
-                  <textarea
-                    placeholder="Napišite nam poruku..."
-                    className="w-full border-2 border-pink-100 rounded-xl px-4 py-3 h-32 focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                  />
+                  <div className="font-medium">{picked.familyName}</div>
+                  <div className="text-sm opacity-70">
+                    {(picked.members || []).map(m => m.name).join(", ")}
+                  </div>
                 </div>
-
                 <button
-                  disabled={loading}
-                  onClick={() => setShowConfirm(true)}
-                  className="w-full py-4 px-8 rounded-xl text-xl font-medium bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg 
-                    hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
+                  onClick={() => { setPicked(null); setInvite(null); setNotice(""); }}
+                  className="text-sm underline"
                 >
-                  {loading ? "Šaljem..." : "Potvrdi odgovor"}
+                  Promeni
                 </button>
+              </div>
 
-                {showConfirm && (
-                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-                    <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
-                      <div className="text-xl font-bold mb-4 text-pink-700">Da li ste sigurni da želite da pošaljete vaš odgovor?</div>
-                      <div className="flex gap-4 justify-center mt-6">
-                        <button className="btn btn-outline" onClick={() => setShowConfirm(false)}>Odustani</button>
-                        <button className="btn btn-primary" onClick={onSubmit}>Pošalji</button>
+              {!invite ? (
+                <div className="text-sm opacity-70">Učitavam detalje…</div>
+              ) : invite.status !== "pending" ? (
+                <div className="p-3 border rounded bg-gray-50">
+                  Već ste poslali potvrdu.
+                  {/* ({invite.status}) */}
+                </div>
+              ) : (
+                <>
+                  <div className="flex gap-4 mb-6">
+                    <button
+                      onClick={() => setStatus("accepted")}
+                      className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
+                        status === "accepted"
+                          ? "bg-pink-500 text-white shadow-lg scale-105"
+                          : "bg-pink-100 text-pink-700 hover:bg-pink-200"
+                      }`}
+                    >
+                      🎉 Dolazimo!
+                    </button>
+                    <button
+                      onClick={() => {
+                        setStatus("declined");
+                        showSad();
+                      }}
+                      className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
+                        status === "declined"
+                          ? "bg-gray-500 text-white shadow-lg scale-105"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
+                    >
+                      😢 Nažalost ne možemo
+                    </button>
+                  </div>
+
+                  {status === "accepted" && (
+                    <div className="space-y-3">
+                      <div>
+                        <label className="block text-sm mb-1">Broj odraslih</label>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => setAdultCount(Math.max(0, adultCount - 1))}
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                            >
+                              -
+                            </button>
+                            <div className="w-20 text-center text-xl font-semibold">
+                              {adultCount}
+                            </div>
+                            <button
+                              onClick={() => setAdultCount(Math.min(10, adultCount + 1))}
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                            >
+                              +
+                            </button>
+                          </div>
+                          {/* <span className="text-gray-500 mt-1 sm:mt-0">odraslih (18+ godina)</span> */}
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm mb-1">Broj dece</label>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => setChildCount(Math.max(0, childCount - 1))}
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                            >
+                              -
+                            </button>
+                            <div className="w-20 text-center text-xl font-semibold">
+                              {childCount}
+                            </div>
+                            <button
+                              onClick={() => setChildCount(Math.min(10, childCount + 1))}
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <span className="text-gray-500 mt-1 sm:mt-0">dece (2-12 godina)</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 p-3 bg-pink-50/50 rounded-xl text-center">
+                        <div className="text-lg font-medium text-gray-700">
+                          Ukupno dolazi: <span className="text-pink-600 font-bold">{adultCount + childCount}</span> {(adultCount + childCount) === 1 ? 'osoba' : 'osobe'}
+                        </div>
                       </div>
                     </div>
+                  )}
+
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-gray-600 mb-2">Poruka za nas (opciono)</label>
+                      <textarea
+                        placeholder="Napišite nam poruku..."
+                        className="w-full border-2 border-pink-100 rounded-xl px-4 py-3 h-32 focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                      />
+                    </div>
+
+                    <button
+                      disabled={loading}
+                      onClick={() => setShowConfirm(true)}
+                      className="w-full py-4 px-8 rounded-xl text-xl font-medium bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg 
+                        hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
+                    >
+                      {loading ? "Šaljem..." : "Potvrdi odgovor"}
+                    </button>
+
+                    {showConfirm && (
+                      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+                        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
+                          <div className="text-xl font-bold mb-4 text-pink-700">Da li ste sigurni da želite da pošaljete vaš odgovor?</div>
+                          <div className="flex gap-4 justify-center mt-6">
+                            <button className="btn btn-outline" onClick={() => setShowConfirm(false)}>Odustani</button>
+                            <button className="btn btn-primary" onClick={onSubmit}>Pošalji</button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            </>
+                </>
+              )}
+            </div>
+          )}
+
+          {notice && (
+            <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 text-gray-800 animate-fade-in">
+              {notice}
+            </div>
           )}
         </div>
-      )}
-
-      {notice && (
-        <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 text-gray-800 animate-fade-in">
-          {notice}
+      ) : (
+        <div className="card relative text-center py-16">
+          <div className="text-2xl font-bold text-pink-700 mb-4">Vaš odgovor je uspešno poslat!</div>
+          <div className="text-lg text-gray-700 mb-2">{notice}</div>
+          {/* <div className="mt-8 text-gray-400">Možete osvežiti stranicu za novu potvrdu.</div> */}
         </div>
       )}
-      
-
-    </div>
     </section>
   );
 }
