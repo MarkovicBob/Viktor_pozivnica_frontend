@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { searchInvites, getInviteByCode, submitRsvp } from "../api/rsvp";
+import { usePopup } from "../App";
 import confetti from 'canvas-confetti';
 
 function useDebounced(value, delay = 250) {
@@ -22,7 +23,7 @@ export default function RsvpWidget() {
   const [childCount, setChildCount] = useState(0);
   const [message, setMessage] = useState("");
   const [notice, setNotice] = useState("");
-  const [showSadEmoji, setShowSadEmoji] = useState(false);
+  const { showSad } = usePopup();
 
   // ako postoji code u URL-u (?code=XYZ), automatski učitaj
   const codeFromUrl = useMemo(() => {
@@ -58,8 +59,16 @@ export default function RsvpWidget() {
         setPicked({ invitationCode: codeFromUrl, familyName: data.familyName, members: data.members });
         setInvite(data);
         setStatus("accepted");
-        setAdultCount(Math.ceil((data.seats ?? 0) / 2));
-        setChildCount(Math.floor((data.seats ?? 0) / 2));
+        
+        // Ista logika kao u pick funkciji
+        const totalMembers = (data.members || []).length;
+        if (totalMembers <= 2) {
+          setAdultCount(totalMembers);
+          setChildCount(0);
+        } else {
+          setAdultCount(2);
+          setChildCount(totalMembers - 2);
+        }
       } catch (e) {
         setNotice("Kod nije pronađen.");
       } finally { setLoading(false); }
@@ -77,8 +86,18 @@ export default function RsvpWidget() {
       const data = await getInviteByCode(item.invitationCode);
       setInvite(data);
       setStatus("accepted");
-      setAdultCount(Math.ceil((data.seats ?? 0) / 2));
-      setChildCount(Math.floor((data.seats ?? 0) / 2));
+
+      // Računamo broj odraslih i dece na osnovu broja članova
+      const totalMembers = (data.members || []).length;
+      if (totalMembers <= 2) {
+        // Za 1-2 člana: svi su odrasli
+        setAdultCount(totalMembers);
+        setChildCount(0);
+      } else {
+        // Za 3+ članova: prva dva su odrasli, ostali su deca
+        setAdultCount(2);
+        setChildCount(totalMembers - 2);
+      }
     } catch (e) {
       setNotice(e.message || "Greška");
     } finally {
@@ -190,8 +209,7 @@ export default function RsvpWidget() {
                 <button
                   onClick={() => {
                     setStatus("declined");
-                    setShowSadEmoji(true);
-                    setTimeout(() => setShowSadEmoji(false), 2000);
+                    showSad();
                   }}
                   className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
                     status === "declined"
@@ -286,15 +304,13 @@ export default function RsvpWidget() {
         </div>
       )}
 
-      {(notice || showSadEmoji) && (
+      {notice && (
         <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 text-gray-800 animate-fade-in">
-          {notice || (showSadEmoji && (
-            <div className="text-6xl animate-bounce">
-              😢
-            </div>
-          ))}
+          {notice}
         </div>
       )}
+      
+
     </div>
   );
 }
