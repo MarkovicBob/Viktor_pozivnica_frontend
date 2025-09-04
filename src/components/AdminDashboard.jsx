@@ -89,18 +89,21 @@ export default function AdminDashboard({ onClose }) {
             <div className="overflow-auto max-h-96">
               <table className="w-full text-left border">
                 <thead>
-                  <tr className="bg-pink-100">
-                    <th className="p-2">Porodica</th>
-                    <th className="p-2">Status</th>
-                    <th className="p-2">Odrasli</th>
-                    <th className="p-2">Deca</th>
-                    <th className="p-2">Poruka</th>
+                  <tr className="bg-pink-100 text-xs sm:text-sm md:text-base">
+                    <th className="p-0.5 sm:p-2 md:p-4">Porodica</th>
+                    <th className="p-0.5 sm:p-2 md:p-4">Status</th>
+                    <th className="p-0.5 sm:p-2 md:p-4">Odrasli</th>
+                    <th className="p-0.5 sm:p-2 md:p-4">Deca</th>
+                    <th className="p-0.5 sm:p-2 md:p-4">Poruka</th>
                   </tr>
                 </thead>
                 <tbody>
                   {rsvps.map(r => (
-                    <tr key={r.invitationCode} className={r.status === 'accepted' ? 'bg-green-50' : r.status === 'declined' ? 'bg-red-50' : ''}>
-                      <td className="p-2 font-bold">
+                    <tr
+                      key={r.invitationCode}
+                      className={`border-b ${r.status === 'accepted' ? 'bg-green-50' : r.status === 'declined' ? 'bg-red-50' : ''}`}
+                    >
+                      <td className="p-0.5 sm:p-2 font-bold">
                         {r.familyName}
                         {Array.isArray(r.members) && r.members.length > 0 && (
                           <div className="text-xs text-gray-500 font-normal mt-1">
