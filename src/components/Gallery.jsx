@@ -47,8 +47,6 @@ export default function Gallery() {
           {items[index].label} • {index + 1}/{items.length}
         </p>
 
-       
-
       </div>
     </section>
   );
