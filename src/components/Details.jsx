@@ -28,8 +28,8 @@ export default function Details(){
       <div>
         <p className="text-sm text-pink-600 font-semibold">Domaćin</p>
         <p className="text-lg font-medium">{host.name}</p>
-        <a className="text-blue-600 underline" href={`tel:${host.phone}`}>{host.phone}</a><br/>
-        <a className="text-blue-600 underline" href={`tel:${host.phone2}`}>{host.phone2}</a>
+        <a className="text-blue-600 underline" href={`tel:${host.phone}`}>Pozovi Mininog tatu</a><br/>
+        <a className="text-blue-600 underline" href={`tel:${host.phone2}`}>Pozovi Mininu mamu</a>
       </div>
     </div>
     <div className="mt-6"><AddToCalendarButton/></div>
