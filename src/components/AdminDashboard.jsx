@@ -92,8 +92,8 @@ export default function AdminDashboard({ onClose }) {
                   <tr className="bg-pink-100">
                     <th className="p-2">Porodica</th>
                     <th className="p-2">Status</th>
-                    <th className="p-2">Broj</th>
-                    <th className="p-2">Kod</th>
+                    <th className="p-2">Odrasli</th>
+                    <th className="p-2">Deca</th>
                     <th className="p-2">Poruka</th>
                   </tr>
                 </thead>
@@ -109,8 +109,8 @@ export default function AdminDashboard({ onClose }) {
                         )}
                       </td>
                       <td className="p-2">{r.status}</td>
-                      <td className="p-2">{r.attendeesCount}</td>
-                      <td className="p-2">{r.invitationCode}</td>
+                      <td className="p-2">{r.adultCount ?? 0}</td>
+                      <td className="p-2">{r.childCount ?? 0}</td>
                       <td className="p-2">{r.message}</td>
                     </tr>
                   ))}
