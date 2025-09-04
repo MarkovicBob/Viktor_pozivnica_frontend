@@ -9,6 +9,7 @@ import CursorConfetti from './components/CursorConfetti.jsx';
 import FloatingBubbles from './components/FloatingBubbles.jsx';
 import SadPopup from './components/SadPopup.jsx';
 import RsvpWidget from './components/RsvpWidget.jsx';
+import AdminDashboard from './components/AdminDashboard.jsx';
 import './styles.css';
 
 
@@ -17,6 +18,7 @@ export const usePopup = () => useContext(PopupContext);
 
 export default function App(){
   const [showSadPopup, setShowSadPopup] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
   
   const showSad = () => {
     setShowSadPopup(true);
@@ -42,14 +44,14 @@ export default function App(){
         <main className="space-y-12">
           <Details/>
           <Gallery/>
-          {/* <RSVP/> */}
           <div ref={rsvpRef}>
             <RsvpWidget bounce={bounce} />
           </div>
         </main>
         <TeddyImage />
-        <Footer/>
+        <Footer onYearClick={() => setShowAdmin(true)}/>
         <SadPopup isVisible={showSadPopup} />
+        {showAdmin && <AdminDashboard onClose={() => setShowAdmin(false)} />}
       </div>
     </PopupContext.Provider>
   );

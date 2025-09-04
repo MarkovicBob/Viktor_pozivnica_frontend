@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 
-// Gallery image placeholders - replace with actual images
 const items = [
-  { id: 1, label: 'Mina 1', color: '#fbcfe8' },
-  { id: 2, label: 'Mina 2', color: '#bfdbfe' },
-  { id: 3, label: 'Mina 3', color: '#fde68a' },
-  { id: 4, label: 'Mina 4', color: '#bbf7d0' }
-].map(x => ({
-  ...x,
-  src: `data:image/svg+xml;utf8,${encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'>
-      <rect width='800' height='600' fill='${x.color}'/>
-      <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='64'>
-        ${x.label}
-      </text>
-    </svg>`
-  )}`
-}));
+  {
+    id: 1,
+    label: 'Mina & tata',
+    src: '/BOB05088.JPG'
+  },
+  {
+    id: 2,
+    label: 'Mina u parku',
+    src: '/BOB05358.JPG'
+  },
+  {
+    id: 3,
+    label: 'Mina & mama',
+    src: '/BOB05735.JPG'
+  },
+  {
+    id: 4,
+    label: 'Mina smeje se',
+    src: '/BOB05956.JPG'
+  }
+];
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
