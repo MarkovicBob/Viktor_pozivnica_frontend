@@ -4,7 +4,7 @@ const API_BASE = window.location.hostname === 'localhost'
   ? ''
   : import.meta.env.VITE_API_URL;
 
-export default function AdminDashboard({ onClose }) {
+export default function AdminDashboard({ isOpen, onClose }) {
   const [token, setToken] = useState("");
   const [authed, setAuthed] = useState(false);
   const [summary, setSummary] = useState(null);
@@ -39,6 +39,21 @@ export default function AdminDashboard({ onClose }) {
         }
       });
   }, [authed, token]);
+  // Prevent background scroll and interaction when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    };
+  }, [isOpen]);
+
 
   function handleLogin(e) {
     e.preventDefault();
