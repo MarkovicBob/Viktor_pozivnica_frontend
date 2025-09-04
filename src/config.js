@@ -1,5 +1,5 @@
 export const event = {
-  title: "Minin prvi rođendan 🎂",
+  title: "Pozivamo Vas na Minin prvi rođendan 🎂",
   dateStart: "2025-10-04T14:00:00+02:00",
   dateEnd: "2025-10-04T20:00:00+02:00",
   location: "Restoran \"Prestige\"",

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 
+const API_BASE = window.location.hostname === 'localhost'
+  ? ''
+  : import.meta.env.VITE_API_URL;
+
 export default function AdminDashboard({ onClose }) {
   const [token, setToken] = useState("");
   const [authed, setAuthed] = useState(false);
@@ -9,16 +13,31 @@ export default function AdminDashboard({ onClose }) {
 
   useEffect(() => {
     if (!authed) return;
-    fetch("/api/admin/rsvps/summary", {
+    setError("");
+    fetch(`${API_BASE}/api/admin/rsvps/summary`, {
       headers: { "x-admin-token": token }
     })
       .then(r => r.json())
-      .then(setSummary);
-    fetch("/api/admin/rsvps?status=all", {
+      .then(data => {
+        if (data.error === 'Unauthorized') {
+          setError('Uneli ste pogrešnu lozinku');
+          setAuthed(false);
+        } else {
+          setSummary(data);
+        }
+      });
+    fetch(`${API_BASE}/api/admin/rsvps?status=all`, {
       headers: { "x-admin-token": token }
     })
       .then(r => r.json())
-      .then(data => Array.isArray(data) ? setRsvps(data) : setError(data.error || "Greška"));
+      .then(data => {
+        if (data.error === 'Unauthorized') {
+          setError('Uneli ste pogrešnu lozinku');
+          setAuthed(false);
+        } else {
+          Array.isArray(data) ? setRsvps(data) : setError(data.error || "Greška");
+        }
+      });
   }, [authed, token]);
 
   function handleLogin(e) {
