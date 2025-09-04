@@ -46,10 +46,9 @@ export default function Gallery() {
         <p className="text-center mt-2 opacity-80">
           {items[index].label} • {index + 1}/{items.length}
         </p>
-        
-        <p className="mt-3 text-sm opacity-70">
-          Zameni SVG placeholdere pravim fotkama (npr. `src/assets`).
-        </p>
+
+       
+
       </div>
     </section>
   );

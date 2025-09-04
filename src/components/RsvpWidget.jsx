@@ -149,6 +149,8 @@ export default function RsvpWidget({ bounce }) {
         <div className="card relative">
           <h3 className="text-3xl font-bold text-pink-700 font-elegant mb-3">Potvrda dolaska</h3>
           <p className="text-lg text-gray-700 mb-6">Molimo potvrdi dolazak kako bismo sve lepo organizovali. 💖</p>
+          <p className="text-lg text-red-700 mb-6">Potvrdite samo ako ste sigurni. 💖</p>
+          <p className="text-lg text-red-700 mb-6">Potvrdite samo za svoju porodicu. 💖</p>
 
           {!picked && (
             <div>
