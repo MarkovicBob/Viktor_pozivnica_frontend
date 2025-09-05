@@ -3,23 +3,48 @@ import React, { useState } from 'react';
 const items = [
   {
     id: 1,
-    label: 'Mina & tata',
-    src: '/BOB05088.JPG'
+    label: '',
+    src: '/1.jpg'
   },
   {
     id: 2,
-    label: 'Mina u parku',
-    src: '/BOB05358.JPG'
+    label: '',
+    src: '/2.jpg'
   },
   {
     id: 3,
-    label: 'Mina & mama',
-    src: '/BOB05735.JPG'
+    label: '',
+    src: '/3.jpg'
   },
   {
     id: 4,
-    label: 'Mina smeje se',
-    src: '/BOB05956.JPG'
+    label: '',
+    src: '/4.jpg'
+  },
+  {
+    id: 5,
+    label: '',
+    src: '/5.jpg'
+  },{
+    id: 6,
+    label: '',
+    src: '/6.jpg'
+  },{
+    id: 7,
+    label: '',
+    src: '/7.jpg'
+  },{
+    id: 8,
+    label: '',
+    src: '/8.jpg'
+  },{
+    id: 9,
+    label: '',
+    src: '/9.jpg'
+  },{
+    id: 10,
+    label: '',
+    src: '/10.jpg'
   }
 ];
 
