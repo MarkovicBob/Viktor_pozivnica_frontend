@@ -108,12 +108,12 @@ export default function AdminDashboard({ isOpen, onClose }) {
               <table className="w-full text-left border">
                 <thead>
                   <tr className="bg-pink-100 text-xs sm:text-sm md:text-base">
-                    <th className="p-0.5 sm:p-2 md:p-4">Porodica</th>
-                    <th className="p-0.5 sm:p-2 md:p-4">Status</th>
-                    <th className="p-0.5 sm:p-2 md:p-4">Odrasli</th>
-                    <th className="p-0.5 sm:p-2 md:p-4">Deca</th>
-                    <th className="p-0.5 sm:p-2 md:p-4">Poruka</th>
-                    <th className="p-0.5 sm:p-2 md:p-4">Potvrdjeno</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Porodica</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Status</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Odrasli</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Deca</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Poruka</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Potvrdjeno</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -131,19 +131,19 @@ export default function AdminDashboard({ isOpen, onClose }) {
                         key={r.invitationCode}
                         className={`border-b ${r.status === 'accepted' ? 'bg-green-50' : r.status === 'declined' ? 'bg-red-50' : ''}`}
                       >
-                        <td className="p-0.5 sm:p-2 font-bold">
+                        <td className="p-0.5 sm:p-2 font-semibold border-r border-pink-200">
                           {r.familyName}
                           {Array.isArray(r.members) && r.members.length > 0 && (
-                            <div className="text-xs text-gray-500 font-normal mt-1">
+                            <div className="text-xs sm:text-sm xl:text-base text-gray-500 font-normal mt-1">
                               {r.members.map(m => m.name).join(", ")}
                             </div>
                           )}
                         </td>
-                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.status}</td>
-                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.adultCount ?? 0}</td>
-                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.childCount ?? 0}</td>
-                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.message}</td>
-                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.status}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.adultCount ?? 0}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.childCount ?? 0}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.message}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">
                           {r.respondedAt ? new Date(r.respondedAt).toLocaleString('sr-RS', { hour12: false }) : "-"}
                         </td>
                       </tr>
