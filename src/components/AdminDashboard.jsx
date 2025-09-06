@@ -110,8 +110,8 @@ export default function AdminDashboard({ isOpen, onClose }) {
                   <tr className="bg-pink-100 text-xs sm:text-sm md:text-base">
                     <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Porodica</th>
                     <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Status</th>
-                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Odrasli</th>
-                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Deca</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300 text-center align-middle">Odrasli</th>
+                    <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300 text-center align-middle">Deca</th>
                     <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Poruka</th>
                     <th className="p-0.5 sm:p-2 md:p-4 border-r border-pink-300">Potvrdjeno</th>
                   </tr>
@@ -140,8 +140,8 @@ export default function AdminDashboard({ isOpen, onClose }) {
                           )}
                         </td>
                         <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.status}</td>
-                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.adultCount ?? 0}</td>
-                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.childCount ?? 0}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200 text-center align-middle">{r.adultCount ?? 0}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200 text-center align-middle">{r.childCount ?? 0}</td>
                         <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">{r.message}</td>
                         <td className="p-0.5 text-xs sm:p-2 sm:text-sm border-r border-pink-200">
                           {r.respondedAt ? new Date(r.respondedAt).toLocaleString('sr-RS', { hour12: false }) : "-"}
