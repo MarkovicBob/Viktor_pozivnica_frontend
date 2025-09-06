@@ -117,30 +117,38 @@ export default function AdminDashboard({ isOpen, onClose }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {rsvps
-                    .filter(r => filterStatus === 'all' ? true : r.status === filterStatus)
-                    .map(r => (
-                    <tr
-                      key={r.invitationCode}
-                      className={`border-b ${r.status === 'accepted' ? 'bg-green-50' : r.status === 'declined' ? 'bg-red-50' : ''}`}
-                    >
-                      <td className="p-0.5 sm:p-2 font-bold">
-                        {r.familyName}
-                        {Array.isArray(r.members) && r.members.length > 0 && (
-                          <div className="text-xs text-gray-500 font-normal mt-1">
-                            {r.members.map(m => m.name).join(", ")}
-                          </div>
-                        )}
-                      </td>
-                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.status}</td>
-                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.adultCount ?? 0}</td>
-                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.childCount ?? 0}</td>
-                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.message}</td>
-                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">
-  {r.respondedAt ? new Date(r.respondedAt).toLocaleString('sr-RS', { hour12: false }) : "-"}
-</td>
-                    </tr>
-                  ))}
+                  {(() => {
+                    const filtered = rsvps.filter(r => filterStatus === 'all' ? true : r.status === filterStatus);
+                    if (filtered.length === 0) {
+                      return (
+                        <tr>
+                          <td colSpan={6} className="text-center py-6 text-gray-500">lista trenutno prazna</td>
+                        </tr>
+                      );
+                    }
+                    return filtered.map(r => (
+                      <tr
+                        key={r.invitationCode}
+                        className={`border-b ${r.status === 'accepted' ? 'bg-green-50' : r.status === 'declined' ? 'bg-red-50' : ''}`}
+                      >
+                        <td className="p-0.5 sm:p-2 font-bold">
+                          {r.familyName}
+                          {Array.isArray(r.members) && r.members.length > 0 && (
+                            <div className="text-xs text-gray-500 font-normal mt-1">
+                              {r.members.map(m => m.name).join(", ")}
+                            </div>
+                          )}
+                        </td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.status}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.adultCount ?? 0}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.childCount ?? 0}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.message}</td>
+                        <td className="p-0.5 text-xs sm:p-2 sm:text-sm">
+                          {r.respondedAt ? new Date(r.respondedAt).toLocaleString('sr-RS', { hour12: false }) : "-"}
+                        </td>
+                      </tr>
+                    ));
+                  })()}
                 </tbody>
               </table>
             </div>
