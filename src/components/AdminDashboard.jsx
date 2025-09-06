@@ -5,6 +5,7 @@ const API_BASE = window.location.hostname === 'localhost'
   : import.meta.env.VITE_API_URL;
 
 export default function AdminDashboard({ isOpen, onClose }) {
+  const [filterStatus, setFilterStatus] = useState('all');
   const [token, setToken] = useState("");
   const [authed, setAuthed] = useState(false);
   const [summary, setSummary] = useState(null);
@@ -84,19 +85,19 @@ export default function AdminDashboard({ isOpen, onClose }) {
             <div className="text-2xl font-bold text-pink-700 mb-4">RSVP Statistika</div>
             {summary && (
               <div className="mb-6 grid grid-cols-2 gap-4 text-center">
-                <div className="bg-pink-50 rounded-xl p-4">
+                <div className="bg-pink-50 rounded-xl p-4 cursor-pointer" onClick={() => setFilterStatus('all')}>
                   <div className="text-lg font-bold text-pink-600">Porodica ukupno</div>
                   <div className="text-2xl">{summary.totalFamilies}</div>
                 </div>
-                <div className="bg-pink-50 rounded-xl p-4">
+                <div className="bg-pink-50 rounded-xl p-4 cursor-pointer" onClick={() => setFilterStatus('accepted')}>
                   <div className="text-lg font-bold text-pink-600">Dolazi</div>
                   <div className="text-2xl">{summary.acceptedFamilies}</div>
                 </div>
-                <div className="bg-pink-50 rounded-xl p-4">
+                <div className="bg-pink-50 rounded-xl p-4 cursor-pointer" onClick={() => setFilterStatus('declined')}>
                   <div className="text-lg font-bold text-pink-600">Ne dolazi</div>
                   <div className="text-2xl">{summary.declinedFamilies}</div>
                 </div>
-                <div className="bg-pink-50 rounded-xl p-4">
+                <div className="bg-pink-50 rounded-xl p-4 cursor-pointer" onClick={() => setFilterStatus('pending')}>
                   <div className="text-lg font-bold text-pink-600">Na čekanju</div>
                   <div className="text-2xl">{summary.pendingFamilies}</div>
                 </div>
@@ -116,7 +117,9 @@ export default function AdminDashboard({ isOpen, onClose }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {rsvps.map(r => (
+                  {rsvps
+                    .filter(r => filterStatus === 'all' ? true : r.status === filterStatus)
+                    .map(r => (
                     <tr
                       key={r.invitationCode}
                       className={`border-b ${r.status === 'accepted' ? 'bg-green-50' : r.status === 'declined' ? 'bg-red-50' : ''}`}
