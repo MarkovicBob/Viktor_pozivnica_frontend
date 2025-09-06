@@ -39,6 +39,8 @@ export default function AdminDashboard({ isOpen, onClose }) {
         }
       });
   }, [authed, token]);
+
+ 
   // Prevent background scroll and interaction when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -110,6 +112,7 @@ export default function AdminDashboard({ isOpen, onClose }) {
                     <th className="p-0.5 sm:p-2 md:p-4">Odrasli</th>
                     <th className="p-0.5 sm:p-2 md:p-4">Deca</th>
                     <th className="p-0.5 sm:p-2 md:p-4">Poruka</th>
+                    <th className="p-0.5 sm:p-2 md:p-4">Potvrdjeno</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -126,10 +129,13 @@ export default function AdminDashboard({ isOpen, onClose }) {
                           </div>
                         )}
                       </td>
-                      <td className="p-2">{r.status}</td>
-                      <td className="p-2">{r.adultCount ?? 0}</td>
-                      <td className="p-2">{r.childCount ?? 0}</td>
-                      <td className="p-2">{r.message}</td>
+                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.status}</td>
+                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.adultCount ?? 0}</td>
+                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.childCount ?? 0}</td>
+                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">{r.message}</td>
+                      <td className="p-0.5 text-xs sm:p-2 sm:text-sm">
+  {r.respondedAt ? new Date(r.respondedAt).toLocaleString('sr-RS', { hour12: false }) : "-"}
+</td>
                     </tr>
                   ))}
                 </tbody>
