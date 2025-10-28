@@ -10,9 +10,21 @@ dayjs.extend(utc);
 dayjs.locale("sr");
 
 export default function Details() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const start = dayjs(event.dateStart);
   const end = dayjs(event.dateEnd);
+
+  // Map language based on selected language
+  const getMapLanguage = () => {
+    switch (language) {
+      case "en":
+        return "en";
+      case "de":
+        return "de";
+      default:
+        return "sr";
+    }
+  };
 
   return (
     <section className="section -mt-8">
@@ -52,12 +64,12 @@ export default function Details() {
         <div className="mt-6">
           <iframe
             title="Mapa"
-            className="w-full h-64 sm:h-72 rounded-xl border"
+            className="w-full h-80 sm:h-96 rounded-xl border"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(
               event.gmapsQuery
-            )}&zoom=17&language=sr`}
+            )}&zoom=15&language=${getMapLanguage()}`}
           ></iframe>
         </div>
       </div>
