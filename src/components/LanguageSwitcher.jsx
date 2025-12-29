@@ -21,11 +21,7 @@ export default function LanguageSwitcher() {
     <div className="fixed top-4 right-4 z-50">
       <button
         onClick={cycleLanguage}
-        className="bg-pink-500 hover:bg-pink-600 text-white px-3 py-2 rounded-lg shadow-lg transition-all duration-200 font-semibold text-sm"
-        style={{
-          backdropFilter: "blur(10px)",
-          background: "rgba(236, 72, 153, 0.9)",
-        }}
+        className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg shadow-lg transition-all duration-200 font-semibold text-sm backdrop-blur-sm"
         title="Cycle through languages / Promeni jezik / Sprache wechseln"
       >
         {getLanguageLabel()}

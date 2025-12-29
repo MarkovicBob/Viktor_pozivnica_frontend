@@ -68,14 +68,14 @@ export default function AdminDashboard({ isOpen, onClose }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full relative">
         <button
-          className="absolute top-4 right-4 text-gray-400 hover:text-pink-500 text-2xl"
+          className="absolute top-4 right-4 text-gray-400 hover:text-emerald-600 text-2xl"
           onClick={onClose}
         >
           &times;
         </button>
         {!authed ? (
           <form onSubmit={handleLogin} className="space-y-4 text-center">
-            <div className="text-2xl font-bold text-pink-700 mb-2">
+            <div className="text-2xl font-bold text-emerald-800 mb-2">
               {t("adminAccess")}
             </div>
             <input
@@ -83,7 +83,7 @@ export default function AdminDashboard({ isOpen, onClose }) {
               placeholder={t("adminPassword")}
               value={token}
               onChange={(e) => setToken(e.target.value)}
-              className="w-full border-2 border-pink-100 rounded-xl px-4 py-3 text-lg focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200"
+              className="w-full border-2 border-emerald-100 rounded-xl px-4 py-3 text-lg focus:outline-none focus:border-emerald-300 focus:ring-2 focus:ring-emerald-200"
             />
             <button type="submit" className="btn btn-primary w-full">
               {t("login")}
@@ -92,7 +92,7 @@ export default function AdminDashboard({ isOpen, onClose }) {
           </form>
         ) : (
           <div>
-            <div className="text-2xl font-bold text-pink-700 mb-4">
+            <div className="text-2xl font-bold text-emerald-800 mb-4">
               {t("rsvpStatistics")}
             </div>
             {summary && (

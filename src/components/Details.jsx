@@ -28,13 +28,22 @@ export default function Details() {
 
   return (
     <section className="section -mt-8">
-      <div className="card relative">
-        <h2 className="text-3xl font-bold text-pink-700 font-elegant">
-          {t("eventDetails")}
-        </h2>
+      <div className="card relative overflow-hidden border border-emerald-600 shadow-xl">
+        {/* Safari decorative corners */}
+        <div className="absolute top-2 right-2 text-3xl opacity-40">🌿</div>
+        <div className="absolute bottom-2 left-2 text-3xl opacity-40">🍃</div>
+
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-4xl">📍</span>
+          <h2 className="text-3xl font-bold text-emerald-800 font-elegant">
+            {t("eventDetails")}
+          </h2>
+        </div>
         <div className="mt-4 grid sm:grid-cols-3 gap-6">
           <div>
-            <p className="text-sm text-pink-600 font-semibold">{t("when")}</p>
+            <p className="text-sm text-emerald-700 font-semibold">
+              {t("when")}
+            </p>
             <p className="text-lg font-medium">
               {start.format("dddd, D. MMMM YYYY.")}
               <br />
@@ -42,12 +51,16 @@ export default function Details() {
             </p>
           </div>
           <div>
-            <p className="text-sm text-pink-600 font-semibold">{t("where")}</p>
+            <p className="text-sm text-emerald-700 font-semibold">
+              {t("where")}
+            </p>
             <p className="text-lg font-medium">{event.location}</p>
             <p className="opacity-80">{event.address}</p>
           </div>
           <div>
-            <p className="text-sm text-pink-600 font-semibold">{t("host")}</p>
+            <p className="text-sm text-emerald-700 font-semibold">
+              {t("host")}
+            </p>
             <p className="text-lg font-medium">{t("hostName")}</p>
             <a className="text-blue-600 underline" href={`tel:${host.phone}`}>
               {t("callMinasDad")}

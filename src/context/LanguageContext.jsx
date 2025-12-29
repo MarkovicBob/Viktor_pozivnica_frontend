@@ -13,7 +13,7 @@ export const useLanguage = () => {
 export const translations = {
   sr: {
     // Hero component
-    heroTitle: "Pozivamo Vas na Minin prvi rođendan 🎂",
+    heroTitle: "Pozivamo Vas na Viktorov prvi rođendan 🎂",
     heroSubtitle:
       "Dođite da zajedno duvamo svećicu, jedemo tortu i pravimo uspomene! 🎈",
     confirmAttendance: "Potvrdi dolazak",
@@ -23,16 +23,16 @@ export const translations = {
     when: "Kada",
     where: "Gde",
     host: "Domaćin",
-    hostName: "Mina sa mamom i tatom",
+    hostName: "Viktor sa mamom i tatom",
     contact: "Kontakt",
     addToCalendar: "Dodaj u kalendar",
     addToCalendarICS: "Dodaj u kalendar (ICS)",
     googleCalendar: "Google Calendar",
-    callMinasDad: "Pozovi Mininog tatu",
-    callMinasMom: "Pozovi Mininu mamu",
+    callMinasDad: "Pozovi Viktorovog tatu",
+    callMinasMom: "Pozovi Viktorovu mamu",
 
     // Gallery
-    galleryTitle: "Mina kroz godinu 📸",
+    galleryTitle: "Viktor kroz godinu 📸",
 
     // RSVP Widget
     rsvpTitle: "Potvrda dolaska",
@@ -87,12 +87,12 @@ export const translations = {
     close: "Zatvori",
 
     // Footer
-    footerMadeBy: "Napravio tata 👨‍💻 sa puno ❤️ za Minu.",
+    footerMadeBy: "Napravio tata 👨‍💻 sa puno ❤️ za Viktora.",
     footerRights: "Sva prava zadržana.",
   },
   en: {
     // Hero component
-    heroTitle: "You're Invited to Mina's First Birthday 🎂",
+    heroTitle: "You're Invited to Viktor's First Birthday 🎂",
     heroSubtitle:
       "Come join us to blow out candles, eat cake and make memories! 🎈",
     confirmAttendance: "Confirm Attendance",
@@ -102,16 +102,16 @@ export const translations = {
     when: "When",
     where: "Where",
     host: "Host",
-    hostName: "Mina with mom and dad",
+    hostName: "Viktor with mom and dad",
     contact: "Contact",
     addToCalendar: "Add to Calendar",
     addToCalendarICS: "Add to Calendar (ICS)",
     googleCalendar: "Google Calendar",
-    callMinasDad: "Call Mina's Dad",
-    callMinasMom: "Call Mina's Mom",
+    callMinasDad: "Call Viktor's Dad",
+    callMinasMom: "Call Viktor's Mom",
 
     // Gallery
-    galleryTitle: "Mina Through the Year 📸",
+    galleryTitle: "Viktor Through the Year 📸",
 
     // RSVP Widget
     rsvpTitle: "RSVP Confirmation",
@@ -168,12 +168,12 @@ export const translations = {
     close: "Close",
 
     // Footer
-    footerMadeBy: "Made by dad 👨‍💻 with lots of ❤️ for Mina.",
+    footerMadeBy: "Made by dad 👨‍💻 with lots of ❤️ for Viktor.",
     footerRights: "All rights reserved.",
   },
   de: {
     // Hero component
-    heroTitle: "Sie sind eingeladen zu Minas erstem Geburtstag 🎂",
+    heroTitle: "Sie sind eingeladen zu Viktors erstem Geburtstag 🎂",
     heroSubtitle:
       "Komm und feiere mit uns - Kerzen ausblasen, Kuchen essen und Erinnerungen schaffen! 🎈",
     confirmAttendance: "Teilnahme bestätigen",
@@ -183,16 +183,16 @@ export const translations = {
     when: "Wann",
     where: "Wo",
     host: "Gastgeber",
-    hostName: "Mina mit Mama und Papa",
+    hostName: "Viktor mit Mama und Papa",
     contact: "Kontakt",
     addToCalendar: "Zum Kalender hinzufügen",
     addToCalendarICS: "Zum Kalender hinzufügen (ICS)",
     googleCalendar: "Google Kalender",
-    callMinasDad: "Minas Papa anrufen",
-    callMinasMom: "Minas Mama anrufen",
+    callMinasDad: "Viktors Papa anrufen",
+    callMinasMom: "Viktors Mama anrufen",
 
     // Gallery
-    galleryTitle: "Mina durchs Jahr 📸",
+    galleryTitle: "Viktor durchs Jahr 📸",
 
     // RSVP Widget
     rsvpTitle: "Teilnahmebestätigung",
@@ -249,7 +249,7 @@ export const translations = {
     close: "Schließen",
 
     // Footer
-    footerMadeBy: "Von Papa 👨‍💻 mit viel ❤️ für Mina gemacht.",
+    footerMadeBy: "Von Papa 👨‍💻 mit viel ❤️ für Viktor gemacht.",
     footerRights: "Alle Rechte vorbehalten.",
   },
 };
