@@ -1,21 +1,21 @@
 export const event = {
   title: "Pozivamo Vas na Viktorov prvi rođendan 🦁",
-  dateStart: "2025-11-15T16:00:00+01:00", // ⬅️ OVDE STAVI TAČAN DATUM/VREME
-  dateEnd: "2025-11-15T20:00:00+01:00", // ⬅️ I OVDE
-  location: 'Restoran "______"', // ⬅️ naziv lokala
-  address: "Ulica i broj, Grad, Država", // ⬅️ adresa
-  gmapsQuery: "Restoran ___, Grad, Država",
+  dateStart: "2026-02-01T15:00:00+01:00",
+  dateEnd: "2026-02-01T19:00:00+01:00",
+  location: 'Restoran "Olimp Lux - velika sala"',
+  address: "Olimp Lux - velika sala",
+  gmapsQuery: "Olimp Lux, velika sala",
 };
 
 export const host = {
   name: "Viktor sa mamom i tatom",
-  phone: "+381 XX XXX XX XX", // ⬅️ stavi prave brojeve
-  phone2: "",
+  phone: "+49 174 89 02 118",
+  phone2: "+49 152 271 999 86",
 };
 
 export const rsvp = {
-  mailTo: "tvoja_mejl_adresa@nešto.com",
-  adminPin: "4321", // drugi pin od Mininog
+  mailTo: "maja95medic@gmail.com",
+  adminPin: "4321",
 };
 
 // export const event = {
