@@ -163,10 +163,23 @@ export default function RsvpWidget({ bounce }) {
       className={`section pt-0${bounce ? " bounce-anim" : ""}`}
     >
       {!sent ? (
-        <div className="card relative">
-          <h3 className="text-3xl font-bold text-pink-700 font-elegant mb-3">
-            {t("rsvpTitle")}
-          </h3>
+        <div className="card relative border border-emerald-600 overflow-hidden shadow-xl">
+          {/* Safari themed decorations */}
+          <div className="absolute top-3 right-3 text-4xl opacity-40 animate-bounce">
+            🎈
+          </div>
+          <div className="absolute top-3 left-3 text-4xl opacity-40">🌿</div>
+          <div className="absolute bottom-3 right-3 text-3xl opacity-30">
+            🦁
+          </div>
+
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-5xl">🎉</span>
+            <h3 className="text-3xl font-bold text-emerald-800 font-elegant">
+              {t("rsvpTitle")}
+            </h3>
+            <span className="text-5xl">🎊</span>
+          </div>
           <p className="text-lg text-gray-700 mb-6">{t("rsvpDescription")}</p>
           <p className="text-lg text-red-700 mb-6">{t("rsvpWarning1")}</p>
           <p className="text-lg text-red-700 mb-6">{t("rsvpWarning2")}</p>
@@ -178,7 +191,7 @@ export default function RsvpWidget({ bounce }) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("searchPlaceholder")}
-                className="w-full border-2 border-pink-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200 font-fredoka"
+                className="w-full border-2 border-emerald-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-emerald-300 focus:ring-2 focus:ring-emerald-200 transition-all duration-200 font-fredoka"
                 style={{ fontFamily: "Fredoka, system-ui, sans-serif" }}
               />
               {loading && (
@@ -241,8 +254,8 @@ export default function RsvpWidget({ bounce }) {
                       onClick={() => setStatus("accepted")}
                       className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
                         status === "accepted"
-                          ? "bg-pink-500 text-white shadow-lg scale-105"
-                          : "bg-pink-100 text-pink-700 hover:bg-pink-200"
+                          ? "bg-emerald-600 text-white shadow-lg scale-105"
+                          : "bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
                       }`}
                     >
                       {t("coming")}
@@ -274,7 +287,7 @@ export default function RsvpWidget({ bounce }) {
                               onClick={() =>
                                 setAdultCount(Math.max(0, adultCount - 1))
                               }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
                             >
                               -
                             </button>
@@ -285,7 +298,7 @@ export default function RsvpWidget({ bounce }) {
                               onClick={() =>
                                 setAdultCount(Math.min(10, adultCount + 1))
                               }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
                             >
                               +
                             </button>
@@ -304,7 +317,7 @@ export default function RsvpWidget({ bounce }) {
                               onClick={() =>
                                 setChildCount(Math.max(0, childCount - 1))
                               }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
                             >
                               -
                             </button>
@@ -315,7 +328,7 @@ export default function RsvpWidget({ bounce }) {
                               onClick={() =>
                                 setChildCount(Math.min(10, childCount + 1))
                               }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-pink-100 text-pink-500 hover:bg-pink-50 active:bg-pink-100 transition-all duration-200"
+                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
                             >
                               +
                             </button>
@@ -326,7 +339,7 @@ export default function RsvpWidget({ bounce }) {
                         </div>
                       </div>
 
-                      <div className="mt-4 p-3 bg-pink-50/50 rounded-xl text-center">
+                      <div className="mt-4 p-3 bg-emerald-50/50 rounded-xl text-center">
                         <div className="text-lg font-medium text-gray-700">
                           {t("totalAttending")}{" "}
                           <span className="text-pink-600 font-bold">
@@ -347,7 +360,7 @@ export default function RsvpWidget({ bounce }) {
                       </label>
                       <textarea
                         placeholder={t("messagePlaceholder")}
-                        className="w-full border-2 border-pink-100 rounded-xl px-4 py-3 h-32 focus:outline-none focus:border-pink-300 focus:ring-2 focus:ring-pink-200 transition-all duration-200"
+                        className="w-full border-2 border-emerald-100 rounded-xl px-4 py-3 h-32 focus:outline-none focus:border-emerald-300 focus:ring-2 focus:ring-emerald-200 transition-all duration-200"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                       />
@@ -356,7 +369,7 @@ export default function RsvpWidget({ bounce }) {
                     <button
                       disabled={loading}
                       onClick={() => setShowConfirm(true)}
-                      className="w-full py-4 px-8 rounded-xl text-xl font-medium bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg 
+                      className="w-full py-4 px-8 rounded-xl text-xl font-medium bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg 
                         hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
                     >
                       {loading ? t("sending") : t("confirmResponse")}
@@ -365,7 +378,7 @@ export default function RsvpWidget({ bounce }) {
                     {showConfirm && (
                       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
                         <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
-                          <div className="text-xl font-bold mb-4 text-pink-700">
+                          <div className="text-xl font-bold mb-4 text-emerald-800">
                             {t("confirmationTitle")}
                           </div>
                           <div className="flex gap-4 justify-center mt-6">
@@ -392,14 +405,14 @@ export default function RsvpWidget({ bounce }) {
           )}
 
           {notice && (
-            <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 text-gray-800 animate-fade-in">
+            <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 text-gray-800 animate-fade-in">
               {notice}
             </div>
           )}
         </div>
       ) : (
         <div className="card relative text-center py-16">
-          <div className="text-2xl font-bold text-pink-700 mb-4">
+          <div className="text-2xl font-bold text-emerald-800 mb-4">
             {t("responseSent")}
           </div>
           <div className="text-lg text-gray-700 mb-2">{notice}</div>

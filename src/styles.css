@@ -71,283 +71,129 @@ html {
 
 @layer components {
   .card {
-    @apply bg-white/80 backdrop-blur rounded-2xl shadow-xl p-6;
+    @apply bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8 relative border-2 border-emerald-100;
+    background-image: radial-gradient(
+        circle at 10% 20%,
+        rgba(79, 111, 82, 0.02) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 90% 80%,
+        rgba(196, 165, 116, 0.02) 0%,
+        transparent 50%
+      );
   }
   .btn {
-    @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium shadow-md transition hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl;
   }
   .btn-primary {
-    @apply bg-pink-500 text-white hover:bg-pink-600;
+    @apply bg-gradient-to-r from-emerald-600 to-emerald-700 text-white hover:from-emerald-700 hover:to-emerald-800;
   }
   .btn-outline {
-    @apply bg-white text-pink-600 border border-pink-200 hover:bg-pink-50;
+    @apply bg-white text-emerald-800 border-2 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-500;
   }
   .section {
-    @apply max-w-5xl mx-auto px-4 sm:px-6;
+    @apply max-w-6xl mx-auto px-6 sm:px-8;
   }
 }
 
 .hero-grad {
-  background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%);
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #2d4a2d 0%,
+    #3d5a3d 15%,
+    #4f6f52 30%,
+    #5a7a5a 50%,
+    #6b8e6b 70%,
+    #8a9d7e 85%,
+    #a08968 100%
+  );
+  overflow: hidden;
 }
 
-@keyframes wave {
+.hero-grad::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: radial-gradient(
+      circle at 25% 25%,
+      rgba(196, 165, 116, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(141, 110, 99, 0.35) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(79, 111, 82, 0.3) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(160, 137, 104, 0.25) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(106, 142, 107, 0.3) 0%,
+      transparent 50%
+    );
+  animation: gradientRotate 20s linear infinite;
+  pointer-events: none;
+}
+
+.hero-grad::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 100px,
+      rgba(255, 255, 255, 0.03) 100px,
+      rgba(255, 255, 255, 0.03) 200px
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+  background-size: 100% 100%, 300% 100%;
+  animation: shimmerWave 10s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+@keyframes gradientRotate {
   0% {
-    transform: translateX(-2px) rotate(-5deg);
+    transform: rotate(0deg) scale(1);
   }
   50% {
-    transform: translateX(2px) rotate(5deg);
+    transform: rotate(180deg) scale(1.2);
   }
   100% {
-    transform: translateX(-2px) rotate(-5deg);
+    transform: rotate(360deg) scale(1);
   }
 }
 
-.animate-wave {
-  animation: wave 2s ease-in-out infinite;
-}
-
-/* Balloon hover effects */
-.balloon-hover {
-  transition: all 0.3s ease;
-}
-
-.balloon-hover:hover {
-  transform: scale(1.1);
-  filter: brightness(1.1);
-}
-
-/* Custom animations for teddy bear */
-@keyframes float {
-  0% {
-    transform: translateY(0px) rotate(-2deg);
+@keyframes shimmerWave {
+  0%,
+  100% {
+    background-position: 0% 0%, -200% 0%;
   }
   50% {
-    transform: translateY(-10px) rotate(2deg);
+    background-position: 0% 0%, 200% 0%;
   }
-  100% {
-    transform: translateY(0px) rotate(-2deg);
-  }
-}
-
-.float-animation {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Bubble animations */
-@keyframes bubble-pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-}
-
-.bubble-pulse {
-  animation: bubble-pulse 2s ease-in-out infinite;
-}
-
-@keyframes bubble-shine {
-  0% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-}
-
-.bubble-shine {
-  animation: bubble-shine 3s ease-in-out infinite;
-}
-
-@keyframes rainbow-shift {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    filter: hue-rotate(30deg);
-  }
-  100% {
-    filter: hue-rotate(0deg);
-  }
-}
-
-.rainbow-shift {
-  animation: rainbow-shift 5s ease-in-out infinite;
-}
-
-.hero-grad {
-  background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%);
-}
-
-@keyframes wave {
-  0% {
-    transform: translateX(-2px) rotate(-5deg);
-  }
-  50% {
-    transform: translateX(2px) rotate(5deg);
-  }
-  100% {
-    transform: translateX(-2px) rotate(-5deg);
-  }
-}
-
-.animate-wave {
-  animation: wave 2s ease-in-out infinite;
-}
-
-/* Balloon hover effects */
-.balloon-hover {
-  transition: all 0.3s ease;
-}
-
-.balloon-hover:hover {
-  transform: scale(1.1);
-  filter: brightness(1.1);
-}
-
-/* Custom animations for teddy bear */
-@keyframes float {
-  0% {
-    transform: translateY(0px) rotate(-2deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(2deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(-2deg);
-  }
-}
-
-.float-animation {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Bubble animations */
-@keyframes bubble-pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-}
-
-.bubble-pulse {
-  animation: bubble-pulse 2s ease-in-out infinite;
-}
-
-@keyframes bubble-shine {
-  0% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-}
-
-.bubble-shine {
-  animation: bubble-shine 3s ease-in-out infinite;
-}
-
-@keyframes rainbow-shift {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    filter: hue-rotate(30deg);
-  }
-  100% {
-    filter: hue-rotate(0deg);
-  }
-}
-
-.rainbow-shift {
-  animation: rainbow-shift 5s ease-in-out infinite;
-}
-
-/* Bubble animations */
-@keyframes bubble-pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-}
-
-.bubble-pulse {
-  animation: bubble-pulse 2s ease-in-out infinite;
-}
-
-@keyframes bubble-shine {
-  0% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-}
-
-.bubble-shine {
-  animation: bubble-shine 3s ease-in-out infinite;
-}
-
-@keyframes rainbow-shift {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    filter: hue-rotate(30deg);
-  }
-  100% {
-    filter: hue-rotate(0deg);
-  }
-}
-
-.rainbow-shift {
-  animation: rainbow-shift 5s ease-in-out infinite;
-}
-
-.hero-grad {
-  background-image: linear-gradient(135deg, #f472b6 0%, #93c5fd 100%);
 }
 
 @keyframes wave {

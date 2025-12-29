@@ -63,11 +63,18 @@ export default function Gallery() {
 
   return (
     <section className="section">
-      <div className="card">
+      <div className="card border border-emerald-600 relative overflow-hidden shadow-xl">
+        {/* Safari decorations */}
+        <div className="absolute top-2 right-2 text-2xl opacity-30">🦒</div>
+        <div className="absolute bottom-2 left-2 text-2xl opacity-30">🐘</div>
+
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-3xl font-bold text-pink-700 font-elegant">
-            {t("galleryTitle")}
-          </h2>
+          <div className="flex items-center gap-3">
+            <span className="text-4xl">📸</span>
+            <h2 className="text-3xl font-bold text-emerald-800 font-elegant">
+              {t("galleryTitle")}
+            </h2>
+          </div>
           <div className="flex gap-2">
             <button className="btn btn-outline" onClick={prev}>
               ◀

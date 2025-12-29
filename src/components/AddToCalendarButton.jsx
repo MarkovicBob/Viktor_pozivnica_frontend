@@ -10,9 +10,9 @@ export default function AddToCalendarButton() {
   const getCalendarDescription = () => {
     switch (language) {
       case "en":
-        return "See you at Mina's 1st birthday! 🎂🎈";
+        return "See you at Viktor's 1st birthday! 🎂🎈";
       case "de":
-        return "Wir sehen uns bei Minas 1. Geburtstag! 🎂🎈";
+        return "Wir sehen uns bei Viktors 1. Geburtstag! 🎂🎈";
       default:
         return "Vidimo se na Mininom 1. rođendanu! 🎂🎈";
     }
@@ -30,7 +30,7 @@ export default function AddToCalendarButton() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "mina-rodjendan.ics";
+    a.download = "viktor-rodjendan.ics";
     a.click();
     URL.revokeObjectURL(url);
   };
