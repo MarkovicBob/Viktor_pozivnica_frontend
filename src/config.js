@@ -14,7 +14,7 @@ export const host = {
 };
 
 export const rsvp = {
-  mailTo: "sayby19@gmail.com",
+  mailTo: "maja95medic@gmail.com",
   adminPin: "4321",
 };
 
