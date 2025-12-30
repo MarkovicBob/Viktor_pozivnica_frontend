@@ -1,11 +1,16 @@
 const PROD_FALLBACK = "https://viktor-pozivnica-server.onrender.com";
-const BASE = (import.meta.env.DEV ? "" : (import.meta.env.VITE_API_URL || PROD_FALLBACK)).replace(/\/$/, "");
+const BASE = (
+  import.meta.env.DEV ? "" : import.meta.env.VITE_API_URL || PROD_FALLBACK
+).replace(/\/$/, "");
 
 async function req(path, init = {}) {
-  const isJsonBody = init.body && typeof init.body === "object" && !(init.body instanceof FormData);
+  const isJsonBody =
+    init.body &&
+    typeof init.body === "object" &&
+    !(init.body instanceof FormData);
 
   const res = await fetch(`${BASE}${path}`, {
-    ...init, 
+    ...init,
     headers: {
       "Content-Type": "application/json",
       ...(init.headers || {}),
@@ -14,7 +19,9 @@ async function req(path, init = {}) {
   });
 
   let data = null;
-  try { data = await res.json(); } catch {}
+  try {
+    data = await res.json();
+  } catch {}
 
   if (!res.ok) {
     throw new Error((data && data.error) || `HTTP ${res.status}`);

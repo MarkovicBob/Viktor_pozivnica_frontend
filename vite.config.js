@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-const PROD_FALLBACK = "https://viktor-pozivnica-server.onrender.com";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
       "/api": {
-        target: "https://mina-pozivnica-server.onrender.com",
+        target: "https://viktor-pozivnica-server.onrender.com",
         changeOrigin: true,
       },
     },
   },
-})
+});
