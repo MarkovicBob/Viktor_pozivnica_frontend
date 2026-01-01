@@ -2,8 +2,8 @@ export const event = {
   title: "Pozivamo Vas na Viktorov prvi rođendan 🦁",
   dateStart: "2026-02-01T15:00:00+01:00",
   dateEnd: "2026-02-01T19:00:00+01:00",
-  location: 'Restoran "Sala Panorama - velika sala"',
-  address: "Sala Panorama - velika sala",
+  location: '"Sala Panorama"',
+  address: "Velika sala",
   gmapsQuery: "Sala Panorama, velika sala",
 };
 
@@ -15,7 +15,6 @@ export const host = {
 
 export const rsvp = {
   mailTo: "rsvp@example.com",
-  adminPin: "4321",
 };
 
 // export const event = {
