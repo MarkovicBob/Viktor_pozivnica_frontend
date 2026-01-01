@@ -29,9 +29,7 @@ export default function Footer() {
       <p className="text-sm opacity-70 mt-2">{t("footerRights")}</p>
       <p className="flex items-center justify-center gap-1 text-sm opacity-70">
         <AiOutlineCopyright />
-        <span style={{ cursor: "pointer" }} onClick={() => navigate("/admin")}>
-          2025
-        </span>
+        <span>2025</span>
       </p>
     </footer>
   );
