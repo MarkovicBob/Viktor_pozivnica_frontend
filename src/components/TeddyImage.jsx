@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function TeddyImage() {
+  const navigate = useNavigate();
+
   return (
     <div
       className="py-12 sm:py-16"
@@ -54,11 +57,13 @@ export default function TeddyImage() {
             <img
               src="/lion.png"
               alt="lion"
+              onClick={() => navigate("/admin")}
               className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300"
               style={{
                 filter:
                   "url(#remove-white) drop-shadow(0 10px 8px rgba(0, 0, 0, 0.15))",
                 mixBlendMode: "multiply",
+                cursor: "pointer",
               }}
             />
           </div>

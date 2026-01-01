@@ -1,8 +1,11 @@
 import { AiOutlineCopyright } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext.jsx";
 
-export default function Footer({ onYearClick }) {
+export default function Footer() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
   return (
     <footer
       className="py-8 text-center"
@@ -26,9 +29,7 @@ export default function Footer({ onYearClick }) {
       <p className="text-sm opacity-70 mt-2">{t("footerRights")}</p>
       <p className="flex items-center justify-center gap-1 text-sm opacity-70">
         <AiOutlineCopyright />
-        <span style={{ cursor: "pointer" }} onClick={onYearClick}>
-          2025
-        </span>
+        <span>2025</span>
       </p>
     </footer>
   );
