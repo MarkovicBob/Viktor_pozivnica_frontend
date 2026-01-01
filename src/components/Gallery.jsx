@@ -62,40 +62,70 @@ export default function Gallery() {
   const next = () => setIndex((i) => (i + 1) % items.length);
 
   return (
-    <section className="section">
-      <div className="card border border-emerald-600 relative overflow-hidden shadow-xl">
-        {/* Safari decorations */}
-        <div className="absolute top-2 right-2 text-2xl opacity-30">🦒</div>
-        <div className="absolute bottom-2 left-2 text-2xl opacity-30">🐘</div>
+    <section
+      className="py-12 sm:py-16"
+      style={{
+        background: "linear-gradient(135deg, #e8dcc8 0%, #f5e6d3 100%)",
+      }}
+    >
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div
+          className="relative overflow-hidden rounded-2xl p-8 sm:p-10"
+          style={{
+            background: "rgba(255,255,255,0.6)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          {/* Decorative elements */}
+          <div className="absolute top-4 right-4 text-2xl opacity-30">🌿</div>
+          <div className="absolute bottom-4 left-4 text-2xl opacity-30">🍃</div>
 
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <span className="text-4xl">📸</span>
-            <h2 className="text-3xl font-bold text-emerald-800 font-elegant">
+          <div className="flex items-center justify-center mb-6">
+            <h2
+              className="text-3xl sm:text-4xl font-light"
+              style={{ color: "#8B7355", fontFamily: "Great Vibes, cursive" }}
+            >
               {t("galleryTitle")}
             </h2>
           </div>
-          <div className="flex gap-2">
-            <button className="btn btn-outline" onClick={prev}>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <button
+              className="px-4 py-2 rounded-full transition-all"
+              style={{
+                background: "linear-gradient(135deg, #C9A961 0%, #A0826D 100%)",
+                color: "white",
+              }}
+              onClick={prev}
+            >
               ◀
             </button>
-            <button className="btn btn-outline" onClick={next}>
+            <button
+              className="px-4 py-2 rounded-full transition-all"
+              style={{
+                background: "linear-gradient(135deg, #C9A961 0%, #A0826D 100%)",
+                color: "white",
+              }}
+              onClick={next}
+            >
               ▶
             </button>
           </div>
-        </div>
 
-        <div className="relative aspect-video overflow-hidden rounded-xl border">
-          <img
-            src={items[index].src}
-            alt={items[index].label}
-            className="w-full h-full object-cover"
-          />
-        </div>
+          <div
+            className="relative aspect-video overflow-hidden rounded-xl"
+            style={{ border: "2px solid #C4B5A0" }}
+          >
+            <img
+              src={items[index].src}
+              alt={items[index].label}
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-        <p className="text-center mt-2 opacity-80">
-          {items[index].label} • {index + 1}/{items.length}
-        </p>
+          <p className="text-center mt-4 text-sm" style={{ color: "#A0826D" }}>
+            {items[index].label} {index + 1}/{items.length}
+          </p>
+        </div>
       </div>
     </section>
   );

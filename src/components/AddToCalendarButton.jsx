@@ -14,7 +14,7 @@ export default function AddToCalendarButton() {
       case "de":
         return "Wir sehen uns bei Viktors 1. Geburtstag! 🎂🎈";
       default:
-        return "Vidimo se na Mininom 1. rođendanu! 🎂🎈";
+        return "Vidimo se na Viktorovom 1. rođendanu! 🎂🎈";
     }
   };
 
@@ -45,7 +45,7 @@ export default function AddToCalendarButton() {
     const end = toGoogle(event.dateEnd);
     const params = new URLSearchParams({
       action: "TEMPLATE",
-      text: t("heroTitle"),
+      text: "Viktor Marković 1.rođendan",
       dates: `${start}/${end}`,
       details: getCalendarDescription(),
       location: `${event.location}, ${event.address}`,
@@ -54,17 +54,27 @@ export default function AddToCalendarButton() {
   };
 
   return (
-    <div className="flex flex-wrap gap-3">
-      <button onClick={handleICS} className="btn btn-primary">
-        <FaCalendarPlus /> {t("addToCalendarICS")}
-      </button>
+    <div className="flex justify-center">
       <a
-        className="btn btn-outline"
+        className="px-8 py-3 rounded-full font-medium transition-all inline-block"
+        style={{
+          backgroundColor: "#C9A961",
+          color: "white",
+          border: "2px solid #C9A961",
+        }}
         target="_blank"
         rel="noreferrer"
         href={googleLink()}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = "transparent";
+          e.target.style.color = "#C9A961";
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = "#C9A961";
+          e.target.style.color = "white";
+        }}
       >
-        {t("googleCalendar")}
+        {t("addToGoogleCalendar")}
       </a>
     </div>
   );

@@ -9,184 +9,176 @@ export default function Hero({ scrollToRsvp }) {
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-green-50">
-      {/* Tropical leaves decoration top left */}
+    <section
+      className="relative overflow-hidden min-h-screen flex items-center justify-center py-12 sm:py-20"
+      style={{
+        background: "linear-gradient(135deg, #f5e6d3 0%, #e8dcc8 100%)",
+      }}
+    >
+      {/* Leaf decorations */}
       <motion.div
-        className="absolute top-0 left-0 z-20 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80"
-        initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1.2, type: "spring" }}
+        className="absolute top-8 left-8 text-6xl sm:text-8xl opacity-40"
+        animate={{ rotate: [0, 10, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
       >
-        <img
-          src="https://i.imgur.com/tropical-leaves-left.png"
-          alt="Tropical leaves"
-          className="w-full h-full object-contain opacity-90"
-          onError={(e) => {
-            e.target.style.display = "none";
-            e.target.parentElement.innerHTML =
-              '<div class="text-8xl opacity-30 animate-wave">🌿🍃</div>';
-          }}
-        />
+        🌿
       </motion.div>
 
-      {/* Tropical leaves decoration top right */}
+      {/* Bottom right - Simple leaf */}
       <motion.div
-        className="absolute top-0 right-0 z-20 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80"
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1.2, type: "spring" }}
+        className="absolute bottom-8 right-8 text-6xl sm:text-8xl opacity-40"
+        animate={{ rotate: [0, -10, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
       >
-        <img
-          src="https://i.imgur.com/tropical-leaves-right.png"
-          alt="Tropical leaves"
-          className="w-full h-full object-contain opacity-90"
-          onError={(e) => {
-            e.target.style.display = "none";
-            e.target.parentElement.innerHTML =
-              '<div class="text-8xl opacity-30 animate-wave" style="animation-delay: 0.3s">🌿🍃</div>';
-          }}
-        />
+        🍃
       </motion.div>
 
-      <div className="relative py-20 sm:py-28">
-        <div className="section text-center relative z-10">
-          {/* Wild ONE text */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, type: "spring", stiffness: 100 }}
-            className="mb-6"
+      {/* Main container with arch background effect */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6">
+        {/* Title at the top */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h1
+            className="text-2xl sm:text-3xl md:text-4xl font-light"
+            style={{
+              color: "#8B7355",
+              fontFamily: "Great Vibes, cursive",
+              letterSpacing: "0.05em",
+            }}
           >
-            <div
-              className="text-2xl sm:text-3xl md:text-4xl font-script text-emerald-700 mb-2"
-              style={{ fontFamily: "Dancing Script, cursive" }}
+            {t("heroTitle")}
+          </h1>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative"
+        >
+          {/* Arch background effect */}
+          <div
+            className="absolute -inset-8 sm:-inset-12 rounded-full opacity-10 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(200,180,150,0.3) 0%, transparent 70%)",
+            }}
+          ></div>
+
+          {/* Main content grid - ONE on left, Video on right - HORIZONTAL LINE - mobile too */}
+          <div className="relative flex flex-row gap-2 sm:gap-4 lg:gap-8 items-center justify-center">
+            {/* Left side - ONE text vertical - each letter on separate line */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col items-center justify-center"
             >
-              Wild
-            </div>
-            <div
-              className="text-7xl sm:text-8xl md:text-9xl font-bold text-amber-500"
+              <div
+                className="text-8xl lg:text-9xl font-bold leading-none"
+                style={{
+                  color: "#8B7355",
+                  fontFamily: "Georgia, serif",
+                  textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+                  letterSpacing: "0.02em",
+                  lineHeight: "0.8",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <span>O</span>
+                <span>N</span>
+                <span>E</span>
+              </div>
+            </motion.div>
+
+            {/* Right side - Video */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className=""
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls={false}
+                preload="auto"
+                className="w-full h-auto rounded-2xl drop-shadow-2xl"
+                style={{
+                  filter: "drop-shadow(0px 10px 25px rgba(0,0,0,0.15))",
+                  objectFit: "cover",
+                }}
+                onEnded={(e) => {
+                  e.target.currentTime = 0;
+                  e.target.play();
+                }}
+              >
+                <source src="/video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </motion.div>
+          </div>
+
+          {/* Content below video */}
+          {/* Viktor name - centered below video */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-center mt-12 mb-8"
+          >
+            <h2
+              className="text-5xl sm:text-6xl md:text-7xl font-light"
               style={{
-                fontFamily: "serif",
-                textShadow: "4px 4px 0px rgba(0,0,0,0.1)",
-                letterSpacing: "0.1em",
+                color: "#8B7355",
+                fontFamily: "Great Vibes, cursive",
+                letterSpacing: "0.05em",
               }}
             >
-              ONE
-            </div>
+              {t("childName")}
+            </h2>
           </motion.div>
-          {/* Safari animals group */}
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.3 }}
-            className="flex justify-center items-end gap-3 sm:gap-6 mb-8 px-4"
-          >
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0 }}
-              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36"
-              whileHover={{ scale: 1.1 }}
-            >
-              <img
-                src="/teddy_bear.png"
-                alt="Monkey"
-                className="w-full h-full object-contain drop-shadow-lg"
-              />
-            </motion.div>
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
-              className="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44"
-              whileHover={{ scale: 1.1 }}
-            >
-              <img
-                src="/giraffe.png"
-                alt="Giraffe"
-                className="w-full h-full object-contain drop-shadow-2xl"
-              />
-            </motion.div>
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
-              className="w-28 h-28 sm:w-40 sm:h-40 md:w-52 md:h-52"
-              whileHover={{ scale: 1.1 }}
-            >
-              <img
-                src="/lion.png"
-                alt="Lion"
-                className="w-full h-full object-contain drop-shadow-2xl"
-              />
-            </motion.div>
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
-              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36"
-              whileHover={{ scale: 1.1 }}
-            >
-              <img
-                src="/teddy_bear2.png"
-                alt="Zebra"
-                className="w-full h-full object-contain drop-shadow-lg"
-              />
-            </motion.div>
-          </motion.div>
-          {/* Bottom foliage decoration */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="flex justify-center gap-2 text-4xl sm:text-5xl mb-6"
-          >
-            <span className="opacity-60">🌿</span>
-            <span className="opacity-70">🍃</span>
-            <span className="opacity-80">🌿</span>
-            <span className="opacity-70">🍃</span>
-            <span className="opacity-60">🌿</span>
-          </motion.div>
-          {/* Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="mb-8"
-          >
-            <p className="text-lg sm:text-xl text-emerald-700 font-medium mb-3">
-              Please Join Us To Celebrate
-            </p>
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-script text-amber-600 mb-4"
-              style={{ fontFamily: "Dancing Script, cursive" }}
-            >
-              {t("heroTitle")}
-            </h1>
-          </motion.div>
+
           {/* CTA Button */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.2 }}
-            className="mt-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-center mb-8"
           >
             <button
               type="button"
-              className="btn text-lg px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-full shadow-xl transform hover:scale-105 transition-all duration-300"
+              className="text-base sm:text-lg px-10 sm:px-12 py-3 text-white rounded-full shadow-lg transform hover:scale-110 transition-all duration-300 font-medium"
+              style={{
+                background: "linear-gradient(135deg, #C9A961 0%, #A0826D 100%)",
+              }}
               onClick={scrollToRsvp}
             >
-              <FaBirthdayCake className="text-2xl" /> {t("confirmAttendance")}{" "}
-              🎉
+              {t("confirmAttendance")}
             </button>
           </motion.div>
-          {/* Event info 
+
+          {/* Organizer */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.4 }}
-            className="mt-8 space-y-2 text-emerald-800"
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="text-center pt-6 border-t-2"
+            style={{ borderColor: "#C4B5A0" }}
           >
-            <p className="text-lg font-medium">{event.location}</p>
-            <p className="text-base">{event.address}</p>
-          </motion.div>*/}
-        </div>
+            <p style={{ color: "#8B7355" }} className="font-medium text-sm">
+              Porodica Marković
+            </p>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
