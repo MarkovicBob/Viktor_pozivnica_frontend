@@ -85,14 +85,26 @@ export default function RsvpWidget({ bounce }) {
         setInvite(data);
         setStatus("accepted");
 
-        // Ista logika kao u pick funkciji
+        // Koristi podatke iz baze ako postoje, inače default logika
         const totalMembers = (data.members || []).length;
-        if (totalMembers <= 2) {
-          setAdultCount(totalMembers);
-          setChildCount(0);
+        if (
+          "adultCount" in data &&
+          "childCount" in data &&
+          data.adultCount !== null &&
+          data.childCount !== null
+        ) {
+          // Ako baza ima podatke, koristi ih
+          setAdultCount(data.adultCount);
+          setChildCount(data.childCount);
         } else {
-          setAdultCount(2);
-          setChildCount(totalMembers - 2);
+          // Inače koristi default logiku
+          if (totalMembers <= 2) {
+            setAdultCount(totalMembers);
+            setChildCount(0);
+          } else {
+            setAdultCount(2);
+            setChildCount(totalMembers - 2);
+          }
         }
       } catch (e) {
         setNotice(t("thankYouDeclined"));
@@ -114,14 +126,26 @@ export default function RsvpWidget({ bounce }) {
       setInvite(data);
       setStatus("accepted");
 
-      // Računamo broj odraslih i dece na osnovu broja članova
+      // Koristi podatke iz baze ako postoje, inače default logika
       const totalMembers = (data.members || []).length;
-      if (totalMembers <= 2) {
-        setAdultCount(totalMembers);
-        setChildCount(0);
+      if (
+        "adultCount" in data &&
+        "childCount" in data &&
+        data.adultCount !== null &&
+        data.childCount !== null
+      ) {
+        // Ako baza ima podatke, koristi ih
+        setAdultCount(data.adultCount);
+        setChildCount(data.childCount);
       } else {
-        setAdultCount(2);
-        setChildCount(totalMembers - 2);
+        // Inače koristi default logiku
+        if (totalMembers <= 2) {
+          setAdultCount(totalMembers);
+          setChildCount(0);
+        } else {
+          setAdultCount(2);
+          setChildCount(totalMembers - 2);
+        }
       }
     } catch (e) {
       setNotice(e.message || "Greška");
