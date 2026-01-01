@@ -160,255 +160,356 @@ export default function RsvpWidget({ bounce }) {
     <section
       id="rsvp-widget"
       aria-label="RSVP"
-      className={`section pt-0${bounce ? " bounce-anim" : ""}`}
+      className={`py-12 sm:py-16${bounce ? " bounce-anim" : ""}`}
+      style={{
+        background: "linear-gradient(135deg, #e8dcc8 0%, #f5e6d3 100%)",
+      }}
     >
       {!sent ? (
-        <div className="card relative border border-emerald-600 overflow-hidden shadow-xl">
-          {/* Safari themed decorations */}
-          <div className="absolute top-3 right-3 text-4xl opacity-40 animate-bounce">
-            🎈
-          </div>
-          <div className="absolute top-3 left-3 text-4xl opacity-40">🌿</div>
-          <div className="absolute bottom-3 right-3 text-3xl opacity-30">
-            🦁
-          </div>
-
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-5xl">🎉</span>
-            <h3 className="text-3xl font-bold text-emerald-800 font-elegant">
-              {t("rsvpTitle")}
-            </h3>
-            <span className="text-5xl">🎊</span>
-          </div>
-          <p className="text-lg text-gray-700 mb-6">{t("rsvpDescription")}</p>
-          <p className="text-lg text-red-700 mb-6">{t("rsvpWarning1")}</p>
-          <p className="text-lg text-red-700 mb-6">{t("rsvpWarning2")}</p>
-
-          {!picked && (
-            <div>
-              <label className="block text-sm mb-1">{t("findFamily")}</label>
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={t("searchPlaceholder")}
-                className="w-full border-2 border-emerald-100 rounded-2xl px-6 py-4 text-lg focus:outline-none focus:border-emerald-300 focus:ring-2 focus:ring-emerald-200 transition-all duration-200 font-fredoka"
-                style={{ fontFamily: "Fredoka, system-ui, sans-serif" }}
-              />
-              {loading && (
-                <div className="text-sm mt-2 opacity-70">{t("searching")}</div>
-              )}
-              {suggest.length > 0 && (
-                <ul className="mt-2 border rounded-xl divide-y overflow-hidden">
-                  {suggest.map((it) => (
-                    <li key={it.invitationCode}>
-                      <button
-                        onClick={() => pick(it)}
-                        className="w-full text-left px-4 py-2 hover:bg-gray-50 font-fredoka"
-                      >
-                        <div className="font-medium font-fredoka">
-                          {it.familyName}
-                        </div>
-                        <div className="text-sm opacity-70 font-fredoka">
-                          {(it.members || []).map((m) => m.name).join(", ")}
-                        </div>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div
+            className="relative overflow-hidden rounded-2xl p-8 sm:p-10"
+            style={{
+              background: "rgba(255,255,255,0.6)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+            {/* Decorations */}
+            <div className="absolute top-4 right-4 text-3xl opacity-30">🎈</div>
+            <div className="absolute top-4 left-4 text-3xl opacity-30">🌿</div>
+            <div className="absolute bottom-4 right-4 text-2xl opacity-30">
+              🍃
             </div>
-          )}
 
-          {picked && (
-            <div className="mt-3 space-y-3">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <div className="font-medium">{picked.familyName}</div>
-                  <div className="text-sm opacity-70">
-                    {(picked.members || []).map((m) => m.name).join(", ")}
-                  </div>
-                </div>
-                <button
-                  onClick={() => {
-                    setPicked(null);
-                    setInvite(null);
-                    setNotice("");
-                  }}
-                  className="text-sm underline"
+            <div className="flex items-center justify-center mb-6">
+              <h3
+                className="text-3xl sm:text-4xl font-light"
+                style={{ color: "#8B7355", fontFamily: "Great Vibes, cursive" }}
+              >
+                {t("rsvpTitle")}
+              </h3>
+            </div>
+            <p
+              className="text-base text-center mb-4"
+              style={{ color: "#8B7355" }}
+            >
+              {t("rsvpDescription")}
+            </p>
+            <p
+              className="text-sm text-center mb-2"
+              style={{ color: "#C9A961" }}
+            >
+              {t("rsvpWarning1")}
+            </p>
+            <p
+              className="text-sm text-center mb-6"
+              style={{ color: "#C9A961" }}
+            >
+              {t("rsvpWarning2")}
+            </p>
+
+            {!picked && (
+              <div>
+                <label
+                  className="block text-sm mb-2"
+                  style={{ color: "#8B7355" }}
                 >
-                  {t("change")}
-                </button>
-              </div>
-
-              {!invite ? (
-                <div className="text-sm opacity-70">{t("loadingDetails")}</div>
-              ) : invite.status !== "pending" ? (
-                <div className="p-3 border rounded bg-gray-50">
-                  {t("alreadyResponded")}
-                  {/* ({invite.status}) */}
-                </div>
-              ) : (
-                <>
-                  <div className="flex gap-4 mb-6">
-                    <button
-                      onClick={() => setStatus("accepted")}
-                      className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
-                        status === "accepted"
-                          ? "bg-emerald-600 text-white shadow-lg scale-105"
-                          : "bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
-                      }`}
-                    >
-                      {t("coming")}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setStatus("declined");
-                        showSad();
-                      }}
-                      className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
-                        status === "declined"
-                          ? "bg-gray-500 text-white shadow-lg scale-105"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
-                    >
-                      {t("notComing")}
-                    </button>
+                  {t("findFamily")}
+                </label>
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={t("searchPlaceholder")}
+                  className="w-full rounded-xl px-4 py-3 text-base focus:outline-none transition-all duration-200"
+                  style={{
+                    border: "2px solid #C4B5A0",
+                    color: "#8B7355",
+                    background: "rgba(255,255,255,0.8)",
+                  }}
+                />
+                {loading && (
+                  <div className="text-sm mt-2 opacity-70">
+                    {t("searching")}
                   </div>
-
-                  {status === "accepted" && (
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-sm mb-1">
-                          {t("numberOfAdults")}
-                        </label>
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                          <div className="flex items-center gap-2">
-                            <button
-                              onClick={() =>
-                                setAdultCount(Math.max(0, adultCount - 1))
-                              }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
-                            >
-                              -
-                            </button>
-                            <div className="w-20 text-center text-xl font-semibold">
-                              {adultCount}
-                            </div>
-                            <button
-                              onClick={() =>
-                                setAdultCount(Math.min(10, adultCount + 1))
-                              }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
-                            >
-                              +
-                            </button>
+                )}
+                {suggest.length > 0 && (
+                  <ul className="mt-2 border rounded-xl divide-y overflow-hidden">
+                    {suggest.map((it) => (
+                      <li key={it.invitationCode}>
+                        <button
+                          onClick={() => pick(it)}
+                          className="w-full text-left px-4 py-2 hover:bg-gray-50 font-fredoka"
+                        >
+                          <div className="font-medium font-fredoka">
+                            {it.familyName}
                           </div>
-                          {/* <span className="text-gray-500 mt-1 sm:mt-0">odraslih (18+ godina)</span> */}
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm mb-1">
-                          {t("numberOfChildren")}
-                        </label>
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                          <div className="flex items-center gap-2">
-                            <button
-                              onClick={() =>
-                                setChildCount(Math.max(0, childCount - 1))
-                              }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
-                            >
-                              -
-                            </button>
-                            <div className="w-20 text-center text-xl font-semibold">
-                              {childCount}
-                            </div>
-                            <button
-                              onClick={() =>
-                                setChildCount(Math.min(10, childCount + 1))
-                              }
-                              className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl border-2 border-emerald-100 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 transition-all duration-200"
-                            >
-                              +
-                            </button>
+                          <div className="text-sm opacity-70 font-fredoka">
+                            {(it.members || []).map((m) => m.name).join(", ")}
                           </div>
-                          <span className="text-gray-500 mt-1 sm:mt-0">
-                            {t("childrenAge")}
-                          </span>
-                        </div>
-                      </div>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
 
-                      <div className="mt-4 p-3 bg-emerald-50/50 rounded-xl text-center">
-                        <div className="text-lg font-medium text-gray-700">
-                          {t("totalAttending")}{" "}
-                          <span className="text-pink-600 font-bold">
-                            {adultCount + childCount}
-                          </span>{" "}
-                          {adultCount + childCount === 1
-                            ? t("person")
-                            : t("people")}
-                        </div>
-                      </div>
+            {picked && (
+              <div className="mt-3 space-y-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <div className="font-medium">{picked.familyName}</div>
+                    <div className="text-sm opacity-70">
+                      {(picked.members || []).map((m) => m.name).join(", ")}
                     </div>
-                  )}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setPicked(null);
+                      setInvite(null);
+                      setNotice("");
+                    }}
+                    className="text-sm underline"
+                  >
+                    {t("change")}
+                  </button>
+                </div>
 
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-gray-600 mb-2">
-                        {t("messageForUs")}
-                      </label>
-                      <textarea
-                        placeholder={t("messagePlaceholder")}
-                        className="w-full border-2 border-emerald-100 rounded-xl px-4 py-3 h-32 focus:outline-none focus:border-emerald-300 focus:ring-2 focus:ring-emerald-200 transition-all duration-200"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                      />
+                {!invite ? (
+                  <div className="text-sm opacity-70">
+                    {t("loadingDetails")}
+                  </div>
+                ) : invite.status !== "pending" ? (
+                  <div className="p-3 border rounded bg-gray-50">
+                    {t("alreadyResponded")}
+                    {/* ({invite.status}) */}
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex gap-4 mb-6">
+                      <button
+                        onClick={() => setStatus("accepted")}
+                        className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
+                          status === "accepted"
+                            ? "bg-emerald-600 text-white shadow-lg scale-105"
+                            : "bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
+                        }`}
+                      >
+                        {t("coming")}
+                      </button>
+                      <button
+                        onClick={() => {
+                          setStatus("declined");
+                          showSad();
+                        }}
+                        className={`flex-1 py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-200 ${
+                          status === "declined"
+                            ? "bg-gray-500 text-white shadow-lg scale-105"
+                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        }`}
+                      >
+                        {t("notComing")}
+                      </button>
                     </div>
 
-                    <button
-                      disabled={loading}
-                      onClick={() => setShowConfirm(true)}
-                      className="w-full py-4 px-8 rounded-xl text-xl font-medium bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg 
-                        hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
-                    >
-                      {loading ? t("sending") : t("confirmResponse")}
-                    </button>
-
-                    {showConfirm && (
-                      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-                        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
-                          <div className="text-xl font-bold mb-4 text-emerald-800">
-                            {t("confirmationTitle")}
+                    {status === "accepted" && (
+                      <div className="space-y-3">
+                        <div>
+                          <label
+                            className="block text-sm mb-2"
+                            style={{ color: "#8B7355" }}
+                          >
+                            {t("numberOfAdults")}
+                          </label>
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() =>
+                                  setAdultCount(Math.max(0, adultCount - 1))
+                                }
+                                className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl transition-all duration-200"
+                                style={{
+                                  border: "2px solid #C4B5A0",
+                                  color: "#8B7355",
+                                  background: "rgba(255,255,255,0.8)",
+                                }}
+                              >
+                                -
+                              </button>
+                              <div
+                                className="w-20 text-center text-xl font-semibold"
+                                style={{ color: "#8B7355" }}
+                              >
+                                {adultCount}
+                              </div>
+                              <button
+                                onClick={() =>
+                                  setAdultCount(Math.min(10, adultCount + 1))
+                                }
+                                className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl transition-all duration-200"
+                                style={{
+                                  border: "2px solid #C4B5A0",
+                                  color: "#8B7355",
+                                  background: "rgba(255,255,255,0.8)",
+                                }}
+                              >
+                                +
+                              </button>
+                            </div>
                           </div>
-                          <div className="flex gap-4 justify-center mt-6">
-                            <button
-                              className="btn btn-outline"
-                              onClick={() => setShowConfirm(false)}
+                        </div>
+
+                        <div>
+                          <label
+                            className="block text-sm mb-2"
+                            style={{ color: "#8B7355" }}
+                          >
+                            {t("numberOfChildren")}
+                          </label>
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() =>
+                                  setChildCount(Math.max(0, childCount - 1))
+                                }
+                                className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl transition-all duration-200"
+                                style={{
+                                  border: "2px solid #C4B5A0",
+                                  color: "#8B7355",
+                                  background: "rgba(255,255,255,0.8)",
+                                }}
+                              >
+                                -
+                              </button>
+                              <div
+                                className="w-20 text-center text-xl font-semibold"
+                                style={{ color: "#8B7355" }}
+                              >
+                                {childCount}
+                              </div>
+                              <button
+                                onClick={() =>
+                                  setChildCount(Math.min(10, childCount + 1))
+                                }
+                                className="w-12 h-12 flex items-center justify-center text-xl font-bold rounded-xl transition-all duration-200"
+                                style={{
+                                  border: "2px solid #C4B5A0",
+                                  color: "#8B7355",
+                                  background: "rgba(255,255,255,0.8)",
+                                }}
+                              >
+                                +
+                              </button>
+                            </div>
+                            <span
+                              className="text-sm mt-1 sm:mt-0"
+                              style={{ color: "#A0826D" }}
                             >
-                              {t("cancel")}
-                            </button>
-                            <button
-                              className="btn btn-primary"
-                              onClick={onSubmit}
+                              {t("childrenAge")}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div
+                          className="mt-4 p-4 rounded-xl text-center"
+                          style={{ background: "rgba(201,169,97,0.1)" }}
+                        >
+                          <div
+                            className="text-base font-medium"
+                            style={{ color: "#8B7355" }}
+                          >
+                            {t("totalAttending")}{" "}
+                            <span
+                              className="font-bold"
+                              style={{ color: "#C9A961" }}
                             >
-                              {t("send")}
-                            </button>
+                              {adultCount + childCount}
+                            </span>{" "}
+                            {adultCount + childCount === 1
+                              ? t("person")
+                              : t("people")}
                           </div>
                         </div>
                       </div>
                     )}
-                  </div>
-                </>
-              )}
-            </div>
-          )}
 
-          {notice && (
-            <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 text-gray-800 animate-fade-in">
-              {notice}
-            </div>
-          )}
+                    <div className="space-y-6">
+                      <div>
+                        <label className="block text-gray-600 mb-2">
+                          {t("messageForUs")}
+                        </label>
+                        <textarea
+                          placeholder={t("messagePlaceholder")}
+                          className="w-full border-2 border-emerald-100 rounded-xl px-4 py-3 h-32 focus:outline-none focus:border-emerald-300 focus:ring-2 focus:ring-emerald-200 transition-all duration-200"
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                        />
+                      </div>
+
+                      <button
+                        disabled={loading}
+                        onClick={() => setShowConfirm(true)}
+                        className="w-full py-3 px-8 rounded-full text-lg font-medium shadow-lg 
+                        hover:shadow-xl hover:scale-105 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, #C9A961 0%, #A0826D 100%)",
+                          color: "white",
+                        }}
+                      >
+                        {loading ? t("sending") : t("confirmResponse")}
+                      </button>
+
+                      {showConfirm && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+                          <div
+                            className="rounded-2xl shadow-xl p-8 max-w-sm w-full text-center"
+                            style={{ background: "rgba(255,255,255,0.95)" }}
+                          >
+                            <div
+                              className="text-xl font-bold mb-4"
+                              style={{ color: "#8B7355" }}
+                            >
+                              {t("confirmationTitle")}
+                            </div>
+                            <div className="flex gap-4 justify-center mt-6">
+                              <button
+                                className="px-6 py-2 rounded-full border-2 transition-all"
+                                style={{
+                                  borderColor: "#C4B5A0",
+                                  color: "#8B7355",
+                                }}
+                                onClick={() => setShowConfirm(false)}
+                              >
+                                {t("cancel")}
+                              </button>
+                              <button
+                                className="px-6 py-2 rounded-full transition-all"
+                                style={{
+                                  background:
+                                    "linear-gradient(135deg, #C9A961 0%, #A0826D 100%)",
+                                  color: "white",
+                                }}
+                                onClick={onSubmit}
+                              >
+                                {t("send")}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+
+            {notice && (
+              <div className="mt-6 p-4 text-center rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 text-gray-800 animate-fade-in">
+                {notice}
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <div className="card relative text-center py-16">

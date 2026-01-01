@@ -17,6 +17,11 @@ export const translations = {
     heroSubtitle:
       "Dođite da zajedno duvamo svećicu, jedemo tortu i pravimo uspomene! 🎈",
     confirmAttendance: "Potvrdi dolazak",
+    childName: "Viktor",
+    monthLabel: "Februar",
+    restaurantLabel: "Restoran",
+    restaurantName: "Olimp Lux",
+    grandHall: "Velika sala",
 
     // Details component
     eventDetails: "Detalji događaja",
@@ -28,6 +33,7 @@ export const translations = {
     addToCalendar: "Dodaj u kalendar",
     addToCalendarICS: "Dodaj u kalendar (ICS)",
     googleCalendar: "Google Calendar",
+    addToGoogleCalendar: "Dodaj u Google Calendar",
     callMinasDad: "Pozovi Viktorovog tatu",
     callMinasMom: "Pozovi Viktorovu mamu",
 
@@ -82,12 +88,13 @@ export const translations = {
     adults: "Odrasli",
     children: "Deca",
     message: "Poruka",
-    confirmedAt: "Potvrdjeno",
+    confirmedAt: "Potvrda",
     emptyList: "lista trenutno prazna",
     close: "Zatvori",
 
     // Footer
-    footerMadeBy: "Napravio tata 👨‍💻 sa puno ❤️ za Viktora.",
+    footerMadeBy: "Ako želite ovakvu pozivnicu, javite se na ",
+    footerWhatsApp: "WhatsApp",
     footerRights: "Sva prava zadržana.",
   },
   en: {
@@ -96,6 +103,11 @@ export const translations = {
     heroSubtitle:
       "Come join us to blow out candles, eat cake and make memories! 🎈",
     confirmAttendance: "Confirm Attendance",
+    childName: "Viktor",
+    monthLabel: "February",
+    restaurantLabel: "Restaurant",
+    restaurantName: "Olimp Lux",
+    grandHall: "Grand hall",
 
     // Details component
     eventDetails: "Event Details",
@@ -107,6 +119,7 @@ export const translations = {
     addToCalendar: "Add to Calendar",
     addToCalendarICS: "Add to Calendar (ICS)",
     googleCalendar: "Google Calendar",
+    addToGoogleCalendar: "Add to Google Calendar",
     callMinasDad: "Call Viktor's Dad",
     callMinasMom: "Call Viktor's Mom",
 
@@ -163,12 +176,13 @@ export const translations = {
     adults: "Adults",
     children: "Children",
     message: "Message",
-    confirmedAt: "Confirmed at",
+    confirmedAt: "Confirmed",
     emptyList: "list is currently empty",
     close: "Close",
 
     // Footer
-    footerMadeBy: "Made by dad 👨‍💻 with lots of ❤️ for Viktor.",
+    footerMadeBy: "If you want an invitation like this, reach out on ",
+    footerWhatsApp: "WhatsApp",
     footerRights: "All rights reserved.",
   },
   de: {
@@ -177,6 +191,11 @@ export const translations = {
     heroSubtitle:
       "Komm und feiere mit uns - Kerzen ausblasen, Kuchen essen und Erinnerungen schaffen! 🎈",
     confirmAttendance: "Teilnahme bestätigen",
+    childName: "Viktor",
+    monthLabel: "Februar",
+    restaurantLabel: "Restaurant",
+    restaurantName: "Olimp Lux",
+    grandHall: "Großer Saal",
 
     // Details component
     eventDetails: "Veranstaltungsdetails",
@@ -188,6 +207,7 @@ export const translations = {
     addToCalendar: "Zum Kalender hinzufügen",
     addToCalendarICS: "Zum Kalender hinzufügen (ICS)",
     googleCalendar: "Google Kalender",
+    addToGoogleCalendar: "Zu Google Calendar hinzufügen",
     callMinasDad: "Viktors Papa anrufen",
     callMinasMom: "Viktors Mama anrufen",
 
@@ -197,7 +217,7 @@ export const translations = {
     // RSVP Widget
     rsvpTitle: "Teilnahmebestätigung",
     rsvpDescription:
-      "Bitte bestätigen Sie Ihre Teilnahme, damit wir alles gut organisieren können. 💖",
+      "Bitte bestätigen Sie Ihre Teilnahme, damit wir organisieren können. 💖",
     rsvpWarning1: "Bitte nur bestätigen, wenn Sie sicher sind. 💖",
     rsvpWarning2: "Bitte nur für Ihre Familie bestätigen. 💖",
     findFamily: "Finden Sie Ihre Familie",
@@ -244,12 +264,13 @@ export const translations = {
     adults: "Erwachsene",
     children: "Kinder",
     message: "Nachricht",
-    confirmedAt: "Bestätigt am",
+    confirmedAt: "Datum",
     emptyList: "Liste ist derzeit leer",
     close: "Schließen",
 
     // Footer
-    footerMadeBy: "Von Papa 👨‍💻 mit viel ❤️ für Viktor gemacht.",
+    footerMadeBy: "Für eine solche Einladung, kontaktieren Sie uns auf ",
+    footerWhatsApp: "WhatsApp",
     footerRights: "Alle Rechte vorbehalten.",
   },
 };

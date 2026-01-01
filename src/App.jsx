@@ -4,7 +4,6 @@ import CursorConfetti from "./components/CursorConfetti.jsx";
 import Details from "./components/Details.jsx";
 import FloatingBubbles from "./components/FloatingBubbles.jsx";
 import Footer from "./components/Footer.jsx";
-import Gallery from "./components/Gallery.jsx";
 import Hero from "./components/Hero.jsx";
 import LanguageSwitcher from "./components/LanguageSwitcher.jsx";
 import React, { createContext, useContext, useState } from "react";
@@ -44,9 +43,8 @@ export default function App() {
           <CursorConfetti />
           <FloatingBubbles />
           <Hero scrollToRsvp={scrollToRsvp} />
-          <main className="space-y-12">
+          <main className="space-y-0 sm:space-y-0">
             <Details />
-            <Gallery />
             <div ref={rsvpRef}>
               <RsvpWidget bounce={bounce} />
             </div>
