@@ -91,6 +91,8 @@ export const translations = {
     confirmedAt: "Potvrda",
     emptyList: "lista trenutno prazna",
     close: "Zatvori",
+    backToInvitation: "← Nazad na pozivnicu",
+    logout: "Odjavi se",
 
     // Footer
     footerMadeBy: "Ako želite ovakvu pozivnicu, javite se na ",
@@ -179,6 +181,8 @@ export const translations = {
     confirmedAt: "Confirmed",
     emptyList: "list is currently empty",
     close: "Close",
+    backToInvitation: "← Back to invitation",
+    logout: "Logout",
 
     // Footer
     footerMadeBy: "If you want an invitation like this, reach out on ",
@@ -267,6 +271,8 @@ export const translations = {
     confirmedAt: "Datum",
     emptyList: "Liste ist derzeit leer",
     close: "Schließen",
+    backToInvitation: "← Zurück zur Einladung",
+    logout: "Abmelden",
 
     // Footer
     footerMadeBy: "Für eine solche Einladung, kontaktieren Sie uns auf ",
