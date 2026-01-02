@@ -102,7 +102,9 @@ export default function Details() {
                 {t("host")}
               </p>
               <p className="text-base font-medium" style={{ color: "#8B7355" }}>
-                {t("hostName")}
+                {t("hostLine1")}
+                <br />
+                {t("hostLine2")}
               </p>
               <a
                 className="text-sm underline"
