@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import LanguageSwitcher from "../components/LanguageSwitcher.jsx";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext.jsx";
 
@@ -14,6 +15,49 @@ export default function AdminPage() {
   const [summary, setSummary] = useState(null);
   const [rsvps, setRsvps] = useState([]);
   const [error, setError] = useState("");
+
+  const filteredRsvps = useMemo(() => {
+    return rsvps.filter((r) =>
+      filterStatus === "all" ? true : r.status === filterStatus
+    );
+  }, [rsvps, filterStatus]);
+
+  const deriveCounts = (r) => {
+    const membersCount = Array.isArray(r.members) ? r.members.length : 0;
+    const adultStored = Number(r.adultCount) || 0;
+    const childStored = Number(r.childCount) || 0;
+
+    // Ako su brojevi definisani (ili korisnik uneo), koristi ih
+    if (adultStored + childStored > 0) {
+      return {
+        adults: adultStored,
+        children: childStored,
+        guests: adultStored + childStored,
+      };
+    }
+
+    // Ako nema unetih brojeva, proceni na osnovu članova
+    if (membersCount <= 0) {
+      return { adults: 0, children: 0, guests: 0 };
+    }
+    if (membersCount <= 2) {
+      return { adults: membersCount, children: 0, guests: membersCount };
+    }
+    return { adults: 2, children: membersCount - 2, guests: membersCount };
+  };
+
+  const totals = useMemo(() => {
+    return filteredRsvps.reduce(
+      (acc, r) => {
+        const c = deriveCounts(r);
+        acc.adults += c.adults;
+        acc.children += c.children;
+        acc.guests += c.guests;
+        return acc;
+      },
+      { guests: 0, adults: 0, children: 0 }
+    );
+  }, [filteredRsvps]);
 
   // Check for existing session on mount
   useEffect(() => {
@@ -151,6 +195,7 @@ export default function AdminPage() {
         background: "linear-gradient(135deg, #f5e6d3 0%, #e8dcc8 100%)",
       }}
     >
+      <LanguageSwitcher />
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
@@ -160,13 +205,6 @@ export default function AdminPage() {
             style={{ color: "#A0826D" }}
           >
             {t("backToInvitation")}
-          </button>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 rounded-full text-sm font-medium"
-            style={{ backgroundColor: "#A0826D", color: "white" }}
-          >
-            {t("logout")}
           </button>
         </div>
 
@@ -344,10 +382,7 @@ export default function AdminPage() {
               </thead>
               <tbody>
                 {(() => {
-                  const filtered = rsvps.filter((r) =>
-                    filterStatus === "all" ? true : r.status === filterStatus
-                  );
-                  if (filtered.length === 0) {
+                  if (filteredRsvps.length === 0) {
                     return (
                       <tr>
                         <td
@@ -360,7 +395,7 @@ export default function AdminPage() {
                       </tr>
                     );
                   }
-                  return filtered.map((r) => (
+                  return filteredRsvps.map((r) => (
                     <tr
                       key={r.invitationCode}
                       className="border-b"
@@ -429,6 +464,62 @@ export default function AdminPage() {
               </tbody>
             </table>
           </div>
+
+          {/* Totals */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div
+              className="rounded-xl p-4 text-center shadow-sm"
+              style={{
+                backgroundColor: "rgba(201, 169, 97, 0.12)",
+                border: "1px solid #C9A961",
+                color: "#8B7355",
+              }}
+            >
+              <div className="text-sm font-semibold">{t("totalGuests")}</div>
+              <div className="text-2xl font-bold" style={{ color: "#C9A961" }}>
+                {totals.guests}
+              </div>
+            </div>
+
+            <div
+              className="rounded-xl p-4 text-center shadow-sm"
+              style={{
+                backgroundColor: "rgba(160, 130, 109, 0.12)",
+                border: "1px solid #A0826D",
+                color: "#8B7355",
+              }}
+            >
+              <div className="text-sm font-semibold">{t("totalAdults")}</div>
+              <div className="text-2xl font-bold" style={{ color: "#A0826D" }}>
+                {totals.adults}
+              </div>
+            </div>
+
+            <div
+              className="rounded-xl p-4 text-center shadow-sm"
+              style={{
+                backgroundColor: "rgba(196, 181, 160, 0.12)",
+                border: "1px solid #C4B5A0",
+                color: "#8B7355",
+              }}
+            >
+              <div className="text-sm font-semibold">{t("totalChildren")}</div>
+              <div className="text-2xl font-bold" style={{ color: "#C4B5A0" }}>
+                {totals.children}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Logout Button at Bottom */}
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={handleLogout}
+            className="px-6 py-3 rounded-full text-sm font-medium shadow-lg hover:shadow-xl transition-all"
+            style={{ backgroundColor: "#A0826D", color: "white" }}
+          >
+            {t("logout")}
+          </button>
         </div>
       </div>
     </div>
