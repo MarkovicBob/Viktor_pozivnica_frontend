@@ -50,7 +50,14 @@ export default function AddToCalendarButton() {
       details: getCalendarDescription(),
       location: `${event.location}, ${event.address}`,
     });
-    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+
+    // Na mobilnim uređajima koristi direktan link ka Google Calendar app-u
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const baseUrl = isMobile
+      ? "https://www.google.com/calendar/render"
+      : "https://calendar.google.com/calendar/render";
+
+    return `${baseUrl}?${params.toString()}`;
   };
 
   return (
