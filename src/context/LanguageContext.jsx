@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const LanguageContext = createContext();
 
@@ -28,7 +28,8 @@ export const translations = {
     when: "Kada",
     where: "Gde",
     host: "Domaćin",
-    hostName: "Viktor sa mamom i tatom",
+    hostLine1: "Viktor sa sekom Paulinom",
+    hostLine2: "mamom i tatom",
     contact: "Kontakt",
     addToCalendar: "Dodaj u kalendar",
     addToCalendarICS: "Dodaj u kalendar (ICS)",
@@ -70,6 +71,11 @@ export const translations = {
     responseSent: "Vaš odgovor je uspešno poslat!",
     thankYouAccepted: "Hvala na potvrdi! Jedva čekamo da se vidimo! 🎉❤️",
     thankYouDeclined: "Hvala na odgovoru! Žao nam je što ne možete doći. 💝",
+    storedResponseTitle: "Vaša potvrda",
+    storedResponseFamily: "Porodica",
+    storedResponseAttending: "Dolazi",
+    storedResponseNotAttending: "Ne dolazi",
+    storedResponseTotal: "Ukupno prijavljeno",
     sadPopup: "Žao nam je što ne možete doći...",
 
     // Admin Dashboard
@@ -78,6 +84,9 @@ export const translations = {
     login: "Prijavi se",
     wrongPassword: "Uneli ste pogrešnu lozinku",
     rsvpStatistics: "RSVP Statistika",
+    totalGuests: "Ukupno gostiju",
+    totalAdults: "Ukupno odraslih",
+    totalChildren: "Ukupno dece",
     totalFamilies: "Porodica ukupno",
     accepted: "Dolazi",
     declined: "Ne dolazi",
@@ -116,7 +125,8 @@ export const translations = {
     when: "When",
     where: "Where",
     host: "Host",
-    hostName: "Viktor with mom and dad",
+    hostLine1: "Viktor with sister Paulina",
+    hostLine2: "with mom and dad",
     contact: "Contact",
     addToCalendar: "Add to Calendar",
     addToCalendarICS: "Add to Calendar (ICS)",
@@ -160,6 +170,11 @@ export const translations = {
       "Thank you for confirming! We can't wait to see you! 🎉❤️",
     thankYouDeclined:
       "Thank you for your response! We're sorry you can't make it. 💝",
+    storedResponseTitle: "Your response",
+    storedResponseFamily: "Family",
+    storedResponseAttending: "Attending",
+    storedResponseNotAttending: "Not attending",
+    storedResponseTotal: "Total confirmed",
     sadPopup: "We're sorry you can't make it...",
 
     // Admin Dashboard
@@ -168,6 +183,9 @@ export const translations = {
     login: "Log in",
     wrongPassword: "You entered the wrong password",
     rsvpStatistics: "RSVP Statistics",
+    totalGuests: "Total guests",
+    totalAdults: "Total adults",
+    totalChildren: "Total children",
     totalFamilies: "Total families",
     accepted: "Attending",
     declined: "Not attending",
@@ -206,7 +224,8 @@ export const translations = {
     when: "Wann",
     where: "Wo",
     host: "Gastgeber",
-    hostName: "Viktor mit Mama und Papa",
+    hostLine1: "Viktor mit Schwester Paulina",
+    hostLine2: "mit Mama und Papa",
     contact: "Kontakt",
     addToCalendar: "Zum Kalender hinzufügen",
     addToCalendarICS: "Zum Kalender hinzufügen (ICS)",
@@ -250,6 +269,11 @@ export const translations = {
       "Vielen Dank für die Bestätigung! Wir freuen uns auf Sie! 🎉❤️",
     thankYouDeclined:
       "Vielen Dank für Ihre Antwort! Schade, dass Sie nicht kommen können. 💝",
+    storedResponseTitle: "Ihre Antwort",
+    storedResponseFamily: "Familie",
+    storedResponseAttending: "Teilnehmend",
+    storedResponseNotAttending: "Nicht teilnehmend",
+    storedResponseTotal: "Insgesamt bestätigt",
     sadPopup: "Schade, dass Sie nicht kommen können...",
 
     // Admin Dashboard
@@ -258,6 +282,9 @@ export const translations = {
     login: "Anmelden",
     wrongPassword: "Sie haben das falsche Passwort eingegeben",
     rsvpStatistics: "RSVP-Statistiken",
+    totalGuests: "Gäste gesamt",
+    totalAdults: "Erwachsene gesamt",
+    totalChildren: "Kinder gesamt",
     totalFamilies: "Familien insgesamt",
     accepted: "Teilnehmend",
     declined: "Nicht teilnehmend",
@@ -282,7 +309,15 @@ export const translations = {
 };
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState("sr");
+  const [language, setLanguage] = useState(() => {
+    if (typeof window === "undefined") return "sr";
+    return localStorage.getItem("language") || "sr";
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    localStorage.setItem("language", language);
+  }, [language]);
 
   const t = (key) => {
     return translations[language][key] || key;
