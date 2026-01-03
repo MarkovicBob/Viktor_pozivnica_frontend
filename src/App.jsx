@@ -6,7 +6,7 @@ import FloatingBubbles from "./components/FloatingBubbles.jsx";
 import Footer from "./components/Footer.jsx";
 import Hero from "./components/Hero.jsx";
 import LanguageSwitcher from "./components/LanguageSwitcher.jsx";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import RsvpWidget from "./components/RsvpWidget.jsx";
 import SadPopup from "./components/SadPopup.jsx";
 import TeddyImage from "./components/TeddyImage.jsx";
@@ -19,6 +19,12 @@ export const usePopup = () => useContext(PopupContext);
 
 function HomePage() {
   const [showSadPopup, setShowSadPopup] = useState(false);
+
+  // Probudi server čim se komponenta mountuje
+  useEffect(() => {
+    fetch("https://viktor-pozivnica-server.onrender.com/health")
+      .catch(() => {}); // Tiho ignoriši greške
+  }, []);
 
   const showSad = () => {
     setShowSadPopup(true);
