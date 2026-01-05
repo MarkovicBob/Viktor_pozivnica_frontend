@@ -1,6 +1,6 @@
 export const event = {
   title: "Pozivamo Vas na Viktorov prvi rođendan 🦁",
-  dateStart: "2026-02-01T15:00:00+01:00",
+  dateStart: "2026-02-01T14:00:00+01:00",
   dateEnd: "2026-02-01T19:00:00+01:00",
   location: '"Sala Panorama"',
   address: "Velika sala",
